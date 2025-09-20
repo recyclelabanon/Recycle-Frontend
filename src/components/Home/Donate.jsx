@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Heart } from "lucide-react";
-import useApi from "../../Hooks/useApi.js";
 
 const Donate = () => {
-  const { sendRequest, loading, error, success } = useApi();
   const [donationType, setDonationType] = useState(null);
   const [amount, setAmount] = useState(50);
   const [formData, setFormData] = useState({
@@ -11,6 +9,7 @@ const Donate = () => {
     email: "",
     message: "",
   });
+  const [success, setSuccess] = useState(false);
 
   const predefinedAmounts = [25, 50, 100, 250, 500];
 
@@ -22,36 +21,17 @@ const Donate = () => {
     }));
   };
 
-  const handleDonate = async (e) => {
+  const handleDonate = (e) => {
     e.preventDefault();
     if (!donationType || amount <= 0) {
       alert("Please select a donation type and enter a valid amount.");
       return;
     }
 
-    const donationData = {
-      donationType,
-      amount,
-      ...formData,
-    };
+    // Normally, you could send this data to your backend to save the donation info
+    console.log("Donation Submitted:", { donationType, amount, ...formData });
 
-    try {
-      await sendRequest(
-        "https://recyclelabanonweb.onrender.com/api/donation",
-        "POST",
-        donationData
-      );
-
-      setDonationType(null);
-      setAmount(50);
-      setFormData({
-        name: "",
-        email: "",
-        message: "",
-      });
-    } catch (error) {
-      error.response && alert(error.response.data.message);
-    }
+    setSuccess(true);
   };
 
   if (success) {
@@ -78,11 +58,8 @@ const Donate = () => {
 
   return (
     <>
-      {/* Donation Header Section (Under Carousel) */}
-      <section
-        className="py-12"
-        style={{ backgroundColor: "#FFF9E6" }} // yellow-tinted background
-      >
+      {/* Donation Header Section */}
+      <section className="py-12" style={{ backgroundColor: "#FFF9E6" }}>
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <Heart className="h-12 w-12 text-yellow-600 mx-auto mb-6" />
@@ -90,9 +67,7 @@ const Donate = () => {
               Seeds of change begin with you—plant them today.
             </h2>
             <p className="text-lg text-gray-600 mb-8">
-              Seed a one-time gift or nurture monthly blooms to cultivate impact.
-              Every contribution grows our shared vision for a collective future
-              and thriving planet.
+              Only bank transfers are accepted. Please use the bank details below to make your donation. Every contribution grows our shared vision for a thriving planet.
             </p>
             <div className="flex justify-center gap-4">
               <button
@@ -112,13 +87,13 @@ const Donate = () => {
         </div>
       </section>
 
-      {/* Donation Form */}
+      {/* Bank Transfer Form */}
       {donationType && (
         <section className="py-16 bg-gray-50">
           <div className="max-w-4xl mx-auto px-4">
             <div className="bg-white rounded-xl shadow-lg p-8">
-              {/* Personal Info */}
               <form onSubmit={handleDonate}>
+                {/* Personal Info */}
                 <div className="mb-8">
                   <h3 className="text-xl font-semibold mb-4">
                     Personal Information
@@ -161,11 +136,10 @@ const Donate = () => {
                       <button
                         type="button"
                         key={preset}
-                        className={`py-3 rounded-lg transition-colors ${
-                          amount === preset
+                        className={`py-3 rounded-lg transition-colors ${amount === preset
                             ? "bg-yellow-600 text-white"
                             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                        }`}
+                          }`}
                         onClick={() => setAmount(preset)}
                       >
                         ${preset}
@@ -192,24 +166,43 @@ const Donate = () => {
                   </div>
                 </div>
 
-                {error && <div className="mb-4 text-red-600">{error}</div>}
+                {/* Bank Details */}
+                {/* Bank Details */}
+                <div className="mb-8">
+                  <h3 className="text-2xl font-bold mb-6 text-center text-yellow-600">
+                    Bank Transfer Details
+                  </h3>
+                  <p className="text-center text-gray-600 mb-6">
+                    <strong>Only bank transfers are accepted.</strong> After transferring, please email the receipt to <strong>donations@recyclelebanon.org</strong>
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+                    <div className="bg-yellow-50 p-6 rounded-xl shadow hover:shadow-lg transition-shadow">
+                      <p className="text-gray-700"><span className="font-semibold">Bank Name:</span> ABC Bank</p>
+                      <p className="text-gray-700"><span className="font-semibold">Account Name:</span> Recycle Lebanon</p>
+                    </div>
+                    <div className="bg-yellow-50 p-6 rounded-xl shadow hover:shadow-lg transition-shadow">
+                      <p className="text-gray-700"><span className="font-semibold">Account Number:</span> 1234567890</p>
+                      <p className="text-gray-700"><span className="font-semibold">IBAN:</span> LB12ABCD1234567890</p>
+                      <p className="text-gray-700"><span className="font-semibold">SWIFT Code:</span> ABCDLBBX</p>
+                    </div>
+                  </div>
+
+                  <div className="text-center mt-6">
+                    <p className="text-gray-500 italic">
+                      Please make sure to include your name in the transfer notes.
+                    </p>
+                  </div>
+                </div>
+
 
                 {/* Submit */}
                 <button
                   type="submit"
-                  disabled={loading}
-                  className="w-full bg-yellow-600 text-white py-4 rounded-lg text-lg font-semibold hover:bg-yellow-700 transition-colors disabled:opacity-50"
+                  className="w-full bg-yellow-600 text-white py-4 rounded-lg text-lg font-semibold hover:bg-yellow-700 transition-colors"
                 >
-                  {loading
-                    ? "Processing..."
-                    : `Donate $${amount} ${
-                        donationType === "monthly" ? "Monthly" : "Now"
-                      }`}
+                  Submit Donation Info
                 </button>
-
-                <p className="text-center text-gray-500 mt-4">
-                  Your donation is tax-deductible to the extent allowed by law.
-                </p>
               </form>
             </div>
           </div>
