@@ -1,5 +1,9 @@
 import { ArrowRight, Users, ShoppingBag, Palette, Heart } from 'lucide-react';
 
+// Recycle Lebanon Blue
+const RECYCLE_LEBANON_BLUE = "#002D9B";
+const RECYCLE_LEBANON_BLUE_DARK = "#001f6e"; // darker hover
+
 const Work = () => {
   const programs = [
     {
@@ -39,13 +43,19 @@ const Work = () => {
   return (
     <section className="py-20 bg-white-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Our Work</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16"
+            style={{ }}>
+          Our Work
+        </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {programs.map((program, index) => (
             <div key={index} className="group">
               {/* Tag above the box */}
-              <div className="text-xs uppercase tracking-widest text-yellow-600 mb-2 font-medium">
+              <div
+                className="text-xs uppercase tracking-widest mb-2 font-medium"
+                style={{ color: RECYCLE_LEBANON_BLUE }}
+              >
                 Collective {program.tag}
               </div>
               
@@ -59,7 +69,7 @@ const Work = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent p-6 flex flex-col justify-end">
                   <div className="flex items-center gap-3 text-white">
                     {program.icon}
-                    <h3 className="text-xl font-bold ">{program.title}</h3>
+                    <h3 className="text-xl font-bold">{program.title}</h3>
                   </div>
                 </div>
               </div>
@@ -70,7 +80,10 @@ const Work = () => {
               {/* Link below the box */}
               <a
                 href="#"
-                className="inline-flex items-center text-yellow-600 hover:text-yellow-800 transition-colors text-sm font-medium"
+                className="inline-flex items-center transition-colors text-sm font-medium"
+                style={{ color: RECYCLE_LEBANON_BLUE }}
+                onMouseOver={(e) => (e.currentTarget.style.color = RECYCLE_LEBANON_BLUE_DARK)}
+                onMouseOut={(e) => (e.currentTarget.style.color = RECYCLE_LEBANON_BLUE)}
               >
                 {program.link}
                 <ArrowRight className="ml-2 h-4 w-4" />

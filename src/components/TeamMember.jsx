@@ -1,10 +1,15 @@
 import PropTypes from 'prop-types';
 
+const BRAND_BLUE = "#2726CC";
+
 const TeamMember = ({ name, role, description, image }) => {
   return (
     <div className="w-72 bg-white hover:scale-105 transition duration-300 rounded-2xl shadow-lg overflow-hidden relative text-center">
       {/* Top Gradient Background */}
-      <div className="h-42 bg-gradient-to-b from-green-500 to-red-700 relative flex justify-center items-end">
+      <div
+        className="h-42 relative flex justify-center items-end"
+        style={{ background: `linear-gradient(to bottom, ${BRAND_BLUE}, ${BRAND_BLUE})` }}
+      >
         {/* Profile Image */}
         <div className="absolute -bottom-10 w-48 h-48 bg-white p-1 rounded-full shadow-md">
           <img 

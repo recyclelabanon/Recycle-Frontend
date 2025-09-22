@@ -4,6 +4,9 @@ import { motion } from "framer-motion";
 import { useNewsContext } from "../Admin/Context/NewsContext";
 import Hero from "../components/Hero";
 
+const BRAND_BLUE = "#2726CC";
+const BRAND_BLUE_HOVER = "#1f25a5";
+
 const NewsPage = () => {
   const { news, loading, error, refreshNews, categories } = useNewsContext();
   const [filter, setFilter] = useState("All");
@@ -24,7 +27,10 @@ const NewsPage = () => {
         Error loading news: {error}
         <button
           onClick={refreshNews}
-          className="ml-4 px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+          className="ml-4 px-3 py-1 text-white rounded"
+          style={{ backgroundColor: BRAND_BLUE }}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE_HOVER)}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE)}
         >
           Retry
         </button>
@@ -44,11 +50,12 @@ const NewsPage = () => {
         <div className="mb-8 flex flex-wrap gap-2">
           <button
             onClick={() => setFilter("All")}
-            className={`px-4 py-2 rounded-full ${
-              filter === "All"
-                ? "bg-yellow-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
+            className={`px-4 py-2 rounded-full transition-colors duration-300 ${
+              filter === "All" ? "text-white" : "bg-gray-200 hover:bg-gray-300"
             }`}
+            style={filter === "All" ? { backgroundColor: BRAND_BLUE } : {}}
+            onMouseOver={(e) => filter === "All" && (e.currentTarget.style.backgroundColor = BRAND_BLUE_HOVER)}
+            onMouseOut={(e) => filter === "All" && (e.currentTarget.style.backgroundColor = BRAND_BLUE)}
           >
             All
           </button>
@@ -57,11 +64,12 @@ const NewsPage = () => {
               <button
                 key={cat}
                 onClick={() => setFilter(cat)}
-                className={`px-4 py-2 rounded-full ${
-                  filter === cat
-                    ? "bg-yellow-600 text-white"
-                    : "bg-gray-200 hover:bg-gray-300"
+                className={`px-4 py-2 rounded-full transition-colors duration-300 ${
+                  filter === cat ? "text-white" : "bg-gray-200 hover:bg-gray-300"
                 }`}
+                style={filter === cat ? { backgroundColor: BRAND_BLUE } : {}}
+                onMouseOver={(e) => filter === cat && (e.currentTarget.style.backgroundColor = BRAND_BLUE_HOVER)}
+                onMouseOut={(e) => filter === cat && (e.currentTarget.style.backgroundColor = BRAND_BLUE)}
               >
                 {cat}
               </button>
@@ -84,26 +92,26 @@ const NewsPage = () => {
                 />
                 <div className="p-6">
                   <div className="flex items-center mb-3">
-                    <span className="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+                    <span
+                      className="text-xs font-semibold px-2 py-1 rounded-full"
+                      style={{ backgroundColor: "#d6e0ff", color: BRAND_BLUE }}
+                    >
                       {newsItem.category || "General"}
                     </span>
                     <span className="text-xs text-gray-500 ml-3">
-                      {new Date(
-                        newsItem.publishedAt || newsItem.createdAt
-                      ).toLocaleDateString()}
+                      {new Date(newsItem.publishedAt || newsItem.createdAt).toLocaleDateString()}
                     </span>
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">
-                    {newsItem.title}
-                  </h3>
+                  <h3 className="text-xl font-semibold mb-2">{newsItem.title}</h3>
                   <p className="text-gray-600 mb-4">{newsItem.summary}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-500">
-                      By {newsItem.author}
-                    </span>
+                    <span className="text-sm text-gray-500">By {newsItem.author}</span>
                     <Link
                       to={`/news/${newsItem.slug}`}
-                      className="text-yellow-600 font-medium hover:text-yellow-700"
+                      className="font-medium transition-colors duration-300"
+                      style={{ color: BRAND_BLUE }}
+                      onMouseOver={(e) => (e.currentTarget.style.color = BRAND_BLUE_HOVER)}
+                      onMouseOut={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
                     >
                       Read more →
                     </Link>

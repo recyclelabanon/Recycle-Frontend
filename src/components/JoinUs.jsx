@@ -4,6 +4,8 @@ import CareerForm from './Form/CareerForm';
 import VolunteerForm from './Form/VolunteerForm';
 import PartnerForm from './Form/PartnerForm';
 
+const BRAND_BLUE = "#2726CC";
+
 const JoinUs = () => {
   const [activeTab, setActiveTab] = useState('careers');
   const [showSuccess, setShowSuccess] = useState(false);
@@ -18,7 +20,7 @@ const JoinUs = () => {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="max-w-md w-full mx-4 bg-white rounded-xl shadow-lg p-8 text-center">
-          <Heart className="h-12 w-12 text-yellow-600 mx-auto mb-6" />
+          <Heart className="h-12 w-12" style={{ color: BRAND_BLUE }} />
           <h2 className="text-2xl font-bold mb-4">Thank You for Your Interest!</h2>
           <p className="text-gray-600 mb-6">
             {activeTab === 'careers' && 'Our recruitment team will review your application and contact you soon.'}
@@ -27,7 +29,8 @@ const JoinUs = () => {
           </p>
           <button
             onClick={() => setShowSuccess(false)}
-            className="bg-yellow-600 text-white px-6 py-3 rounded-lg hover:bg-yellow-700 transition-colors"
+            className="text-white px-6 py-3 rounded-lg transition-colors"
+            style={{ backgroundColor: BRAND_BLUE }}
           >
             Return to Join Us
           </button>
@@ -57,11 +60,11 @@ const JoinUs = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center px-6 py-3 rounded-lg transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-yellow-600 text-white'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
-                }`}
+                className={`flex items-center px-6 py-3 rounded-lg transition-colors`}
+                style={{
+                  backgroundColor: activeTab === tab.id ? BRAND_BLUE : '#ffffff',
+                  color: activeTab === tab.id ? '#ffffff' : '#4B5563' // gray-600
+                }}
               >
                 <tab.icon className="h-5 w-5 mr-2" />
                 {tab.label}

@@ -4,12 +4,15 @@ import Section from './Section';
 import PartnerGrid from './PartnerGrid';
 import { img1, img13, img15, img17, img18, img19, img2, img22, img23, img24, img26, img27, img3, img38, img39, img4, img42, img43, img45, img46, img5, img50, img6, img7, img8 } from "../assets/Image";
 
+const BRAND_BLUE = "#2726CC";
+
 const Partners = () => {
   const navigate = useNavigate();
   const handleClick = () => {
     navigate("/joinus");
     window.scrollTo(0, 0); // Scroll to top
   };
+
   const coalitions = [
     { name: 'Break Free From Plastic', category: 'coalition', img: img50},
     { name: 'Chimica Verde Bionet', category: 'coalition', img: img5},
@@ -40,7 +43,6 @@ const Partners = () => {
     { name: 'University of Arizona Environment', category: 'project', img: img3},
     { name: 'RELIEF', category: 'project', img: img45},
     { name: 'AUB ESDU', category: 'project', img: img4},
-    // { name: 'AUB Neighbourhood Initiative', category: 'project', img: img1},
     { name: "Mashrou'Leila", category: 'project', img: img24},
     { name: 'GreenPeace', category: 'project', img: img17},
     { name: 'Colonel Brewery', category: 'project', img: img8},
@@ -72,7 +74,10 @@ const Partners = () => {
           <button
             id="join-us"
             onClick={handleClick}
-            className="bg-yellow-600 cursor-pointer text-white px-8 py-3 rounded-md hover:bg-yellow-700 transition-colors"
+            className="cursor-pointer text-white px-8 py-3 rounded-md transition-colors"
+            style={{ backgroundColor: BRAND_BLUE }}
+            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = BRAND_BLUE}
+            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = BRAND_BLUE}
           >
             Become a Partner
           </button>

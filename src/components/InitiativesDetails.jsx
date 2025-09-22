@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { DiveIntoAction, EcoSouk, RegenerativeHubTeam, TerraPods } from '../assets/Image';
 
+const BRAND_BLUE = "#2726CC";
+
 const programData = {
   regeneratehub: {
     title: 'RegenerateHub',
@@ -210,11 +212,13 @@ const InitiativesDetails = () => {
   }
 
   return (
-    <div className="min-h-max p-6 md:p-10 max-w-6xl mx-auto bg-white-50 rounded-lg shadow-lg">
+    <div className="min-h-max p-6 md:p-10 max-w-6xl mx-auto bg-gray-50 rounded-lg shadow-lg">
       <div className="flex flex-col md:flex-row gap-8 mt-16">
-        {/* Main content (60-70% width) */}
+        {/* Main content */}
         <div className="md:w-4/5">
-          <h1 className="text-3xl font-bold text-green-800 mb-6">{program.title}</h1>
+          <h1 className="text-3xl font-bold mb-6" style={{ color: BRAND_BLUE }}>
+            {program.title}
+          </h1>
           
           <div className="mb-8">
             <img 
@@ -227,11 +231,11 @@ const InitiativesDetails = () => {
           <div className="prose max-w-none mb-8" dangerouslySetInnerHTML={{ __html: program.longDescription }} />
           
           <div className="mb-8">
-            <h2 className="text-2xl font-semibold text-green-700 mb-4">Accomplishments</h2>
+            <h2 className="text-2xl font-semibold mb-4" style={{ color: BRAND_BLUE }}>Accomplishments</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {program.accomplishments.map((item, index) => (
-                <div key={index} className="bg-green-50 p-4 rounded-lg">
-                  <p className="font-bold text-green-700">{item.value}</p>
+                <div key={index} className="p-4 rounded-lg" style={{ backgroundColor: `${BRAND_BLUE}10` }}>
+                  <p className="font-bold" style={{ color: BRAND_BLUE }}>{item.value}</p>
                   <p className="text-sm text-gray-600">{item.label}</p>
                 </div>
               ))}
@@ -240,11 +244,11 @@ const InitiativesDetails = () => {
           
           {program.callToActions.length > 0 && (
             <div className="mb-8">
-              <h2 className="text-2xl font-semibold text-green-700 mb-4">Call to Actions</h2>
+              <h2 className="text-2xl font-semibold mb-4" style={{ color: BRAND_BLUE }}>Call to Actions</h2>
               <div className="space-y-2">
                 {program.callToActions.map((item, index) => (
                   <div key={index} className="flex items-start">
-                    <span className="inline-block bg-green-100 text-green-800 rounded-full px-3 py-1 text-sm font-semibold mr-3">
+                    <span className="inline-block rounded-full px-3 py-1 text-sm font-semibold mr-3" style={{ backgroundColor: `${BRAND_BLUE}20`, color: BRAND_BLUE }}>
                       {index + 1}
                     </span>
                     <p>
@@ -258,15 +262,15 @@ const InitiativesDetails = () => {
           )}
         </div>
         
-        {/* Sidebar (30-40% width) */}
+        {/* Sidebar */}
         <div className="md:w-1/3 space-y-6">
           {program.offers.length > 0 && (
-            <div className="bg-blue-50 p-5 rounded-lg">
-              <h3 className="text-xl font-semibold text-blue-800 mb-3">Offers & Services</h3>
+            <div className="p-5 rounded-lg" style={{ backgroundColor: `${BRAND_BLUE}10` }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: BRAND_BLUE }}>Offers & Services</h3>
               <ul className="space-y-2">
                 {program.offers.map((item, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-blue-500 mr-2">•</span>
+                    <span className="mr-2" style={{ color: BRAND_BLUE }}>•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -275,12 +279,12 @@ const InitiativesDetails = () => {
           )}
           
           {program.donations.length > 0 && (
-            <div className="bg-purple-50 p-5 rounded-lg">
-              <h3 className="text-xl font-semibold text-purple-800 mb-3">Donations & Support</h3>
+            <div className="p-5 rounded-lg bg-purple-50">
+              <h3 className="text-xl font-semibold mb-3" style={{ color: BRAND_BLUE }}>Donations & Support</h3>
               <ul className="space-y-2">
                 {program.donations.map((item, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-purple-500 mr-2">•</span>
+                    <span className="mr-2" style={{ color: BRAND_BLUE }}>•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -289,12 +293,12 @@ const InitiativesDetails = () => {
           )}
           
           {program.team.length > 0 && (
-            <div className="bg-yellow-50 p-5 rounded-lg">
-              <h3 className="text-xl font-semibold text-yellow-800 mb-3">Team</h3>
+            <div className="p-5 rounded-lg" style={{ backgroundColor: `${BRAND_BLUE}10` }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: BRAND_BLUE }}>Team</h3>
               <ul className="space-y-2">
                 {program.team.map((item, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-yellow-500 mr-2">•</span>
+                    <span className="mr-2" style={{ color: BRAND_BLUE }}>•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -303,12 +307,12 @@ const InitiativesDetails = () => {
           )}
           
           {program.partners.length > 0 && (
-            <div className="bg-green-50 p-5 rounded-lg">
-              <h3 className="text-xl font-semibold text-green-800 mb-3">Partners</h3>
+            <div className="p-5 rounded-lg" style={{ backgroundColor: `${BRAND_BLUE}10` }}>
+              <h3 className="text-xl font-semibold mb-3" style={{ color: BRAND_BLUE }}>Partners</h3>
               <ul className="space-y-2">
                 {program.partners.map((item, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-green-500 mr-2">•</span>
+                    <span className="mr-2" style={{ color: BRAND_BLUE }}>•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -317,12 +321,12 @@ const InitiativesDetails = () => {
           )}
           
           {program.donors.length > 0 && (
-            <div className="bg-red-50 p-5 rounded-lg">
-              <h3 className="text-xl font-semibold text-red-800 mb-3">Donors</h3>
+            <div className="p-5 rounded-lg bg-red-50">
+              <h3 className="text-xl font-semibold mb-3" style={{ color: BRAND_BLUE }}>Donors</h3>
               <ul className="space-y-2">
                 {program.donors.map((item, index) => (
                   <li key={index} className="flex items-start">
-                    <span className="text-red-500 mr-2">•</span>
+                    <span className="mr-2" style={{ color: BRAND_BLUE }}>•</span>
                     <span>{item}</span>
                   </li>
                 ))}
@@ -335,13 +339,15 @@ const InitiativesDetails = () => {
       <div className="mt-12 text-center">
         <Link 
           to="/initiatives" 
-          className="inline-flex items-center gap-2 px-6 py-3 text-green-600 hover:text-green-700 hover:underline font-medium transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 font-medium transition-colors"
+          style={{ color: BRAND_BLUE }}
         >
           <svg 
             className="w-5 h-5" 
             fill="none" 
             stroke="currentColor" 
             viewBox="0 0 24 24"
+            style={{ color: BRAND_BLUE }}
           >
             <path 
               strokeLinecap="round" 

@@ -24,28 +24,28 @@ import {
 const Participate = () => {
   const opportunities = [
     {
-      icon: <Leaf className="h-6 w-6 text-yellow-600" />,
+      icon: <Leaf className="h-6 w-6 text-[#00239C]" />,
       title: "Agroecology trainings",
       date: "April - August 2024",
       type: "Training",
       image: Kendy_Allegraa,
     },
     {
-      icon: <Users className="h-6 w-6 text-yellow-600" />,
+      icon: <Users className="h-6 w-6 text-[#00239C]" />,
       title: "Sustainable Packaging Youth Fellowship",
       date: "6-12 May 2024",
       type: "Fellowship",
       image: EcoSouk,
     },
     {
-      icon: <Users className="h-6 w-6 text-yellow-600" />,
+      icon: <Users className="h-6 w-6 text-[#00239C]" />,
       title: "The Big Brotherhood Masculine Leadership Retreat",
       date: "June 2024",
       type: "Fellowship",
       image: LeaderShip,
     },
     {
-      icon: <Palette className="h-6 w-6 text-yellow-600" />,
+      icon: <Palette className="h-6 w-6 text-[#00239C]" />,
       title: "Biodiversity Art Residency",
       date: "July - September 2024",
       type: "Fellowship",
@@ -110,10 +110,10 @@ const Participate = () => {
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                <div className="absolute top-4 left-4 bg-yellow-100 rounded-full p-2">
+                <div className="absolute top-4 left-4 bg-[#00239C]/10 rounded-full p-2">
                   {item.icon}
                 </div>
-                <span className="absolute top-4 right-4 bg-white/90 text-yellow-600 text-xs font-semibold px-3 py-1 rounded-full">
+                <span className="absolute top-4 right-4 bg-white/90 text-[#00239C] text-xs font-semibold px-3 py-1 rounded-full">
                   {item.type}
                 </span>
               </div>
@@ -127,7 +127,7 @@ const Participate = () => {
                 </div>
 
                 {/* Register Button */}
-                <button className="mt-auto w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-lg flex items-center justify-center transition-colors">
+                <button className="mt-auto w-full bg-[#00239C] hover:bg-[#001b7a] text-white py-2 px-4 rounded-lg flex items-center justify-center transition-colors">
                   Register Now
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </button>

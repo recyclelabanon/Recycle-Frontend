@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useBlogContext } from '../Admin/Context/BlogContext';
 
+const RECYCLE_LEBANON_BLUE = "#2726CC";
+
 const Blog = () => {
   const { blogs, loading, error, refreshBlogs, categories } = useBlogContext();
   const [filter, setFilter] = useState('All');
@@ -19,7 +21,11 @@ const Blog = () => {
   if (error) return (
     <div className="p-8 text-red-500">
       Error loading blogs: {error}
-      <button onClick={refreshBlogs} className="ml-4 px-3 py-1 bg-blue-500 text-white rounded">
+      <button 
+        onClick={refreshBlogs} 
+        className="ml-4 px-3 py-1 rounded" 
+        style={{ backgroundColor: RECYCLE_LEBANON_BLUE, color: 'white' }}
+      >
         Retry
       </button>
     </div>
@@ -27,24 +33,34 @@ const Blog = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6">Our Blog</h1>
+      <h1 className="text-3xl font-bold mb-6" style={{ color: RECYCLE_LEBANON_BLUE }}>
+        Our Blog
+      </h1>
 
       {/* Category Filter */}
       <div className="mb-8">
         <button
           onClick={() => setFilter('All')}
-          className={`px-4 py-2 mr-2 rounded-full ${
-            filter === 'All' ? 'bg-yellow-600 text-white' : 'bg-gray-200 hover:bg-gray-300'
-          }`}
-        >All</button>
+          className={`px-4 py-2 mr-2 rounded-full transition-colors`}
+          style={{
+            backgroundColor: filter === 'All' ? RECYCLE_LEBANON_BLUE : '#e5e7eb',
+            color: filter === 'All' ? 'white' : 'black',
+          }}
+        >
+          All
+        </button>
         {categories.map(cat => (
           <button
             key={cat}
             onClick={() => setFilter(cat)}
-            className={`px-4 py-2 mr-2 rounded-full ${
-              filter === cat ? 'bg-yellow-600 text-white' : 'bg-gray-200 hover:bg-gray-300'
-            }`}
-          >{cat}</button>
+            className="px-4 py-2 mr-2 rounded-full transition-colors"
+            style={{
+              backgroundColor: filter === cat ? RECYCLE_LEBANON_BLUE : '#e5e7eb',
+              color: filter === cat ? 'white' : 'black',
+            }}
+          >
+            {cat}
+          </button>
         ))}
       </div>
 
@@ -64,7 +80,10 @@ const Blog = () => {
               />
               <div className="p-6">
                 <div className="flex items-center mb-3">
-                  <span className="text-xs font-semibold px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+                  <span
+                    className="text-xs font-semibold px-2 py-1 rounded-full"
+                    style={{ backgroundColor: `${RECYCLE_LEBANON_BLUE}20`, color: RECYCLE_LEBANON_BLUE }}
+                  >
                     {blog.category || 'General'}
                   </span>
                   <span className="text-xs text-gray-500 ml-3">
@@ -77,8 +96,11 @@ const Blog = () => {
                   <span className="text-sm text-gray-500">By {blog.author}</span>
                   <Link
                     to={`/blog/${blog.slug}`}
-                    className="text-yellow-600 font-medium hover:text-yellow-700"
-                  >Read more →</Link>
+                    style={{ color: RECYCLE_LEBANON_BLUE }}
+                    className="font-medium hover:underline"
+                  >
+                    Read more →
+                  </Link>
                 </div>
               </div>
             </motion.div>

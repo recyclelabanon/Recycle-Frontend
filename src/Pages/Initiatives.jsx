@@ -3,6 +3,8 @@ import Hero from '../components/Hero';
 import Section from '../components/Section';
 import { Link } from 'react-router-dom';
 
+const BRAND_BLUE = "#2726CC";
+
 const Initiatives = () => {
   const programs = [
     {
@@ -61,9 +63,7 @@ const Initiatives = () => {
             <div
               key={program.id}
               className={`group flex flex-col ${
-                program.layout === 'right'
-                  ? 'lg:flex-row'
-                  : 'lg:flex-row-reverse'
+                program.layout === 'right' ? 'lg:flex-row' : 'lg:flex-row-reverse'
               } gap-6 lg:gap-10 items-center p-6 rounded-2xl transition-all duration-300 bg-gray-100 hover:bg-white hover:shadow-lg`}
             >
               {/* Image */}
@@ -78,12 +78,8 @@ const Initiatives = () => {
 
               {/* Content */}
               <div className="lg:w-1/2 w-full space-y-5">
-                <h3 className="text-3xl font-bold text-gray-800">
-                  {program.title}
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed">
-                  {program.shortDescription}
-                </p>
+                <h3 className="text-3xl font-bold text-gray-800">{program.title}</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">{program.shortDescription}</p>
 
                 {/* Get Involved Section */}
                 <div className="space-y-3">
@@ -92,7 +88,13 @@ const Initiatives = () => {
                     {program.actions.map((action, i) => (
                       <button
                         key={i}
-                        className="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-2 px-4 rounded-md transition-colors"
+                        className="w-full"
+                        style={{
+                          backgroundColor: BRAND_BLUE,
+                          color: 'white',
+                        }}
+                        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#1d22a0')}
+                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE)}
                       >
                         {action}
                       </button>
@@ -102,7 +104,10 @@ const Initiatives = () => {
 
                 <Link
                   to={`/initiatives/${program.id}`}
-                  className="inline-flex items-center text-yellow-600 hover:text-yellow-700 hover:underline font-medium gap-2 transition-colors"
+                  className="inline-flex items-center font-medium gap-2 transition-colors"
+                  style={{ color: BRAND_BLUE }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = '#1d22a0')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
                 >
                   <span>Explore Initiative</span>
                   <svg

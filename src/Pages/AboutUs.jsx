@@ -3,8 +3,9 @@ import Hero from '../components/Hero';
 import Section from '../components/Section';
 import { Link } from 'react-router-dom';
 
+const BRAND_BLUE = "#2726CC";
+
 const AboutUs = () => {
-  // Original content sections
   const contentSections = [
     {
       title: "Our Mission",
@@ -19,7 +20,7 @@ const AboutUs = () => {
       image: {
         src: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1470",
         alt: "Team working together",
-        position: "right" // left or right
+        position: "right"
       }
     },
     {
@@ -70,40 +71,37 @@ const AboutUs = () => {
     }
   ];
 
-  // Impact Programs remain unchanged.
   const impactPrograms = [
     {
       title: "RegenerateHub",
       description: "Propels data driven community engagement, fostering climate-driven practices and resilient ecosystems.",
       logo: img34,
-      bgColor: "bg-green-50",
-      hoverColor: "hover:bg-green-100"
+      bgColor: "bg-[#2726CC]/10",
+      hoverColor: "hover:bg-[#2726CC]/20"
     },
     {
       title: "EcoSouk",
       description: "Nurtures conscious living and local economies, connecting makers and consumers.",
       logo: img12,
-      bgColor: "bg-green-50",
-      hoverColor: "hover:bg-green-100"
+      bgColor: "bg-[#2726CC]/10",
+      hoverColor: "hover:bg-[#2726CC]/20"
     },
     {
       title: "TerraPods",
       description: "Fosters innovation and self sufficiency through STEAM-driven collaboration.",
       logo: img41,
-      bgColor: "bg-green-50",
-      hoverColor: "hover:bg-green-100"
+      bgColor: "bg-[#2726CC]/10",
+      hoverColor: "hover:bg-[#2726CC]/20"
     },
     {
       title: "Dive Into Action",
       description: "Sparks a transformative shift toward environmental conscious actions.",
       logo: img10,
-      bgColor: "bg-green-50",
-      hoverColor: "hover:bg-green-100"
+      bgColor: "bg-[#2726CC]/10",
+      hoverColor: "hover:bg-[#2726CC]/20"
     }
   ];
 
-
-  // Destructure our content sections for clarity
   const mission = contentSections.find(section => section.title === "Our Mission");
   const vision = contentSections.find(section => section.title === "Our Vision");
   const story = contentSections.find(section => section.title === "Our Story");
@@ -116,7 +114,7 @@ const AboutUs = () => {
         backgroundImage="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2013&q=80"
       />
 
-      {/* Render Our Mission */}
+      {/* Our Mission */}
       <Section title={mission.title} dark={mission.dark}>
         <div className={`max-w-6xl mx-auto flex flex-col-reverse ${mission.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
           <div className="md:w-1/2">
@@ -138,7 +136,7 @@ const AboutUs = () => {
         </div>
       </Section>
 
-       {/* Render Our Vision */}
+      {/* Our Vision */}
       <Section title={vision.title} dark={vision.dark}>
         <div className={`max-w-6xl mx-auto flex flex-col-reverse ${vision.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
           <div className="md:w-1/2">
@@ -160,8 +158,7 @@ const AboutUs = () => {
         </div>
       </Section>
 
-
-      {/* Render Impact Statement between Our Story and Our Vision */}
+      {/* Impact Statement */}
       <Section title="Impact Statement">
         <div className="max-w-5xl mx-auto">
           <div className="prose prose-lg max-w-4xl mx-auto mb-8">
@@ -188,7 +185,9 @@ const AboutUs = () => {
                       className="w-full h-full object-contain"
                     />
                   </div>
-                  <h3 className="text-xl font-semibold text-green-800">{program.title}</h3>
+                  <h3 className="text-xl font-semibold" style={{ color: BRAND_BLUE }}>
+                    {program.title}
+                  </h3>
                 </div>
                 <p className="text-gray-700 mt-2">{program.description}</p>
               </Link>
@@ -197,7 +196,7 @@ const AboutUs = () => {
         </div>
       </Section>
 
-     {/* Render Our Story */}
+      {/* Our Story */}
       <Section title={story.title} dark={story.dark}>
         <div className={`max-w-6xl mx-auto flex flex-col-reverse ${story.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
           <div className="md:w-1/2">

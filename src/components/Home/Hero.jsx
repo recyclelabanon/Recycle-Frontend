@@ -1,6 +1,9 @@
 import { ChevronRight } from "lucide-react";
 import { useState } from "react";
 
+// Recycle Lebanon Purple-Blue (Pantone 2726C)
+const RECYCLE_LEBANON_BLUE = "#2726CC";
+
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -58,18 +61,27 @@ const Hero = () => {
           <h1
             className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up hover:scale-105 transition-transform duration-300 cursor-default"
           >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-yellow-600 animate-text-glow">
+            <span
+              className="bg-clip-text text-transparent animate-text-glow"
+              style={{
+                backgroundImage: `linear-gradient(to right, ${RECYCLE_LEBANON_BLUE}, ${RECYCLE_LEBANON_BLUE})`,
+              }}
+            >
               re[psych]le
             </span>
             <br className="md:hidden" /> the system, <br />
             design out waste.
             {/* Animated underline */}
-            <div className="mt-4 mx-auto w-24 h-1 bg-yellow-500 rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+            <div
+              className="mt-4 mx-auto w-24 h-1 rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
+              style={{ backgroundColor: RECYCLE_LEBANON_BLUE }}
+            />
           </h1>
 
           <button
-            className="bg-yellow-600 hover:bg-yellow-700 text-white px-8 py-3 rounded-full flex items-center justify-center mx-auto transition-all 
+            className="text-white px-8 py-3 rounded-full flex items-center justify-center mx-auto transition-all 
                       transform hover:scale-105 hover:shadow-2xl active:scale-95 group relative overflow-hidden"
+            style={{ backgroundColor: RECYCLE_LEBANON_BLUE }}
           >
             {/* Button Shine Effect */}
             <div

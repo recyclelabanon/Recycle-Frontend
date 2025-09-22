@@ -2,6 +2,8 @@ import { useState } from 'react';
 import useApi from '../../Hooks/useApi';
 import PropTypes from 'prop-types';
 
+const BRAND_BLUE = "#2726CC";
+
 const VolunteerForm = ({ onSuccess }) => {
   const { sendRequest } = useApi();
   const [formData, setFormData] = useState({
@@ -61,7 +63,8 @@ const VolunteerForm = ({ onSuccess }) => {
             required
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
         <div>
@@ -72,7 +75,8 @@ const VolunteerForm = ({ onSuccess }) => {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
         <div>
@@ -82,7 +86,8 @@ const VolunteerForm = ({ onSuccess }) => {
             required
             value={formData.availability}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
           >
             <option value="">Select Availability</option>
             <option value="weekdays">Weekdays</option>
@@ -97,7 +102,8 @@ const VolunteerForm = ({ onSuccess }) => {
             required
             value={formData.interest}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
           >
             <option value="">Select Interest</option>
             <option value="Tree Planting Initiative">Tree Planting Initiative</option>
@@ -112,20 +118,23 @@ const VolunteerForm = ({ onSuccess }) => {
             required
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
             rows={4}
           />
         </div>
       </div>
       <button
         type="submit"
-        className="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
+        className="w-full text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-900 transition-colors"
+        style={{ backgroundColor: BRAND_BLUE }}
       >
         Submit Application
       </button>
     </form>
   );
 };
+
 VolunteerForm.propTypes = {
   onSuccess: PropTypes.func.isRequired,
 };

@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuth } from '../Admin/Context/AuthContext';
 
+const BRAND_BLUE = "#2726CC";
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -58,7 +60,8 @@ const Login = () => {
             <input
               id="email"
               type="email"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
+              style={{ focusRingColor: BRAND_BLUE }}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -72,7 +75,8 @@ const Login = () => {
             <input
               id="password"
               type="password"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none"
+              style={{ focusRingColor: BRAND_BLUE }}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -82,7 +86,10 @@ const Login = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-2 px-4 text-white bg-yellow-500 rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500 focus:ring-opacity-50 disabled:opacity-50"
+            className="w-full py-2 px-4 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-opacity-50 disabled:opacity-50"
+            style={{ backgroundColor: BRAND_BLUE }}
+            onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#1d22a0')}
+            onMouseOut={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE)}
           >
             {isSubmitting ? 'Logging in...' : 'Login'}
           </button>
@@ -90,7 +97,16 @@ const Login = () => {
         
         <div className="mt-4 text-center">
           <p className="text-sm text-gray-600">
-            Don&apos;t have an account? <Link to="/register" className="text-yellow-600 hover:underline">Register</Link>
+            Don&apos;t have an account?{' '}
+            <Link
+              to="/register"
+              className="hover:underline"
+              style={{ color: BRAND_BLUE }}
+              onMouseOver={(e) => (e.currentTarget.style.color = '#1d22a0')}
+              onMouseOut={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
+            >
+              Register
+            </Link>
           </p>
         </div>
       </div>

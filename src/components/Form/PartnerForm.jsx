@@ -2,6 +2,8 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import useApi from '../../Hooks/useApi';
 
+const BRAND_BLUE = "#2726CC";
+
 const PartnerForm = ({ onSuccess }) => {
   const { sendRequest } = useApi();
   const [formData, setFormData] = useState({
@@ -30,14 +32,12 @@ const PartnerForm = ({ onSuccess }) => {
         phone: formData.phone,
         partnershipInterest: formData.message,
       };
-      
 
       await sendRequest(
         'https://recyclelabanonweb.onrender.com/api/partner',
         'POST',
         payload
       );
-      
 
       onSuccess();
       setFormData({
@@ -63,7 +63,8 @@ const PartnerForm = ({ onSuccess }) => {
             required
             value={formData.organization}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
         <div>
@@ -74,7 +75,8 @@ const PartnerForm = ({ onSuccess }) => {
             required
             value={formData.contactPerson}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
         <div>
@@ -85,7 +87,8 @@ const PartnerForm = ({ onSuccess }) => {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
         <div>
@@ -96,7 +99,8 @@ const PartnerForm = ({ onSuccess }) => {
             required
             value={formData.phone}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
         <div className="col-span-full">
@@ -106,7 +110,8 @@ const PartnerForm = ({ onSuccess }) => {
             required
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
             rows={4}
             placeholder="Tell us about your organization..."
           />
@@ -114,13 +119,15 @@ const PartnerForm = ({ onSuccess }) => {
       </div>
       <button
         type="submit"
-        className="w-full bg-green-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-green-700 transition-colors"
+        className="w-full text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-900 transition-colors"
+        style={{ backgroundColor: BRAND_BLUE }}
       >
         Submit Partnership Request
       </button>
     </form>
   );
 };
+
 PartnerForm.propTypes = {
   onSuccess: PropTypes.func.isRequired,
 };

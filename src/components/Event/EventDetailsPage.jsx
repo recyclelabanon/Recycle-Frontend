@@ -137,7 +137,7 @@ const EventDetailsPage = () => {
             </span>
           )}
           {eventStatus === 'current' && (
-            <span className="px-3 py-1 text-sm font-semibold rounded-full bg-green-100 text-green-800">
+            <span className="px-3 py-1 text-sm font-semibold rounded-full bg-blue-100 text-green-800">
               Happening Now
             </span>
           )}
@@ -261,14 +261,14 @@ const EventDetailsPage = () => {
             ) : (
               <>
                 {registrationStatus.isRegistered ? (
-                  <div className="bg-green-50 border border-green-200 rounded-md p-4 mb-4">
+                  <div className="bg-blue-50 border border-blue-200 rounded-md p-4 mb-4">
                     <div className="flex">
-                      <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <svg className="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                       </svg>
                       <div>
-                        <p className="font-medium text-green-800">You&apos;re registered!</p>
-                        <p className="text-sm text-green-700 mt-1">
+                        <p className="font-medium text-blue-800">You&apos;re registered!</p>
+                        <p className="text-sm text-blue-700 mt-1">
                           Ticket #: {registrationStatus.registration?.ticketNumber}
                         </p>
                       </div>

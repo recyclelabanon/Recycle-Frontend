@@ -3,6 +3,8 @@ import moment from 'moment';
 import PropTypes from 'prop-types';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
+const BRAND_BLUE = "#2726CC";
+
 moment.locale('en');
 const localizer = momentLocalizer(moment);
 
@@ -42,7 +44,8 @@ const EventCalendar = ({ events, onSelectEvent }) => {
         </span>
         <button
           onClick={() => onNavigate('TODAY')}
-          className="px-4 py-1.5 rounded-lg bg-green-600 text-white hover:bg-green-700"
+          className="px-4 py-1.5 rounded-lg text-white hover:opacity-90"
+          style={{ backgroundColor: BRAND_BLUE }}
         >
           Today
         </button>
@@ -52,11 +55,11 @@ const EventCalendar = ({ events, onSelectEvent }) => {
           <button
             key={v}
             onClick={() => onView(v)}
-            className={`px-4 py-1.5 rounded-lg capitalize ${
-              view === v 
-                ? 'bg-green-600 text-white' 
-                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-            }`}
+            className={`px-4 py-1.5 rounded-lg capitalize text-white`}
+            style={{
+              backgroundColor: view === v ? BRAND_BLUE : '#f3f4f6',
+              color: view === v ? '#ffffff' : '#374151',
+            }}
           >
             {v}
           </button>
@@ -84,7 +87,7 @@ const EventCalendar = ({ events, onSelectEvent }) => {
         components={{
           toolbar: CustomToolbar,
           event: ({ event }) => (
-            <div className="hover:bg-green-50 transition-colors">
+            <div className="hover:bg-blue-50 transition-colors">
               {event.title}
             </div>
           ),

@@ -34,7 +34,6 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white/90 backdrop-blur-md fixed w-full z-50 shadow-sm">
-
       <div className="w-full px-4 sm:px-6 md:px-12">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
@@ -61,8 +60,8 @@ const Navbar = () => {
                 className={`px-4 py-2 rounded-md transition-colors relative group
                   ${
                     isActive(item.path)
-                      ? "text-yellow-600 bg-yellow-50 font-medium"
-                      : "text-gray-700 hover:text-yellow-600 hover:bg-yellow-50"
+                      ? "text-[#2726CC] bg-[#2726CC]/10 font-medium"
+                      : "text-gray-700 hover:text-[#2726CC] hover:bg-[#2726CC]/10"
                   }`}
               >
                 {item.name}
@@ -70,7 +69,7 @@ const Navbar = () => {
                 <div className="absolute left-1/2 transform -translate-x-1/2 mt-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                   <div className="pt-2">
                     <div className="bg-white rounded-lg shadow-lg px-4 py-2 whitespace-nowrap text-sm">
-                      <div className="font-medium text-yellow-600">
+                      <div className="font-medium text-[#2726CC]">
                         {item.fullName}
                       </div>
                       <div className="text-gray-600">{item.description}</div>
@@ -84,7 +83,7 @@ const Navbar = () => {
           {/* Mobile menu button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 rounded-md text-gray-700 hover:text-yellow-600 focus:outline-none"
+            className="lg:hidden p-2 rounded-md text-gray-700 hover:text-[#2726CC] focus:outline-none"
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -100,14 +99,14 @@ const Navbar = () => {
                 className={`block px-4 py-2 rounded-md cursor-pointer
                   ${
                     isActive(item.path)
-                      ? "bg-yellow-50 text-yellow-600"
-                      : "text-gray-700 hover:bg-yellow-50 hover:text-yellow-600"
+                      ? "bg-[#2726CC]/10 text-[#2726CC]"
+                      : "text-gray-700 hover:bg-[#2726CC]/10 hover:text-[#2726CC]"
                   }`}
               >
                 <div className="font-medium">{item.fullName}</div>
                 <div
                   className={`text-sm ${
-                    isActive(item.path) ? "text-yellow-500" : "text-gray-500"
+                    isActive(item.path) ? "text-[#2726CC]" : "text-gray-500"
                   }`}
                 >
                   {item.description}

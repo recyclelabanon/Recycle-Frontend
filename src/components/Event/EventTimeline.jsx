@@ -16,7 +16,7 @@ const EventTimeline = ({ timeline }) => (
           className="relative flex items-start gap-4 pb-8"
         >
           <div className="relative z-10">
-            <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-medium">
+            <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-medium">
               {index + 1}
             </div>
           </div>

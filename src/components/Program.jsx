@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import PropTypes from 'prop-types';
 
-
+const BRAND_BLUE = "#2726CC";
 
 const Program = ({
   title,
@@ -28,7 +28,7 @@ const Program = ({
             <ul className="space-y-2">
               {highlights.map((highlight, index) => (
                 <li key={index} className="flex items-start">
-                  <ArrowRight className="h-5 w-5 text-yellow-600 mr-2 mt-1 flex-shrink-0" />
+                  <ArrowRight className="h-5 w-5 mr-2 mt-1 flex-shrink-0" style={{ color: BRAND_BLUE }} />
                   <span className="text-gray-600">{highlight}</span>
                 </li>
               ))}
@@ -42,7 +42,7 @@ const Program = ({
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {accomplishments.map((item, index) => (
                 <div key={index} className="text-center p-4 bg-gray-50 rounded-lg">
-                  <div className="text-2xl font-bold text-yellow-600">{item.value}</div>
+                  <div className="text-2xl font-bold" style={{ color: BRAND_BLUE }}>{item.value}</div>
                   <div className="text-sm text-gray-600">{item.label}</div>
                 </div>
               ))}
@@ -56,7 +56,10 @@ const Program = ({
             {callToActions.map((cta, index) => (
               <button
                 key={index}
-                className="w-full py-2 px-4 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors"
+                className="w-full py-2 px-4 text-white rounded-md transition-colors"
+                style={{ backgroundColor: BRAND_BLUE }}
+                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = BRAND_BLUE}
+                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = BRAND_BLUE}
               >
                 {cta.label}
               </button>
@@ -67,6 +70,7 @@ const Program = ({
     </div>
   );
 };
+
 Program.propTypes = {
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,

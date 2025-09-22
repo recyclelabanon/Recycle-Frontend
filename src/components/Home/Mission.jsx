@@ -4,6 +4,10 @@ import Users from '/EcoTools/Abundance.jpg';
 import Heart from '/EcoTools/Liberation.jpg';
 import Sprout from '/EcoTools/solidarity.jpg';
 
+// Recycle Lebanon Blue
+const RECYCLE_LEBANON_BLUE = "#002D9B";
+const RECYCLE_LEBANON_BLUE_DARK = "#001f6e"; // darker shade
+
 const Mission = () => {
   const values = [
     { img: Leaf, text: 'Empowerment' },
@@ -33,7 +37,8 @@ const Mission = () => {
   return (
     <section className="py-20 bg-white md:px-24">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in-up">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 animate-fade-in-up"
+            style={{ }}>
           Ecological Tools for Collective Action
         </h2>
         
@@ -52,11 +57,21 @@ const Mission = () => {
               }}
             >
               {/* Gradient border effect */}
-              <div className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-yellow-400 to-yellow-500 via-yellow-600 animate-gradient-rotate" />
+              <div
+                className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{
+                  background: `linear-gradient(135deg, ${RECYCLE_LEBANON_BLUE}, ${RECYCLE_LEBANON_BLUE_DARK})`
+                }}
+              />
               
               {/* Card content */}
               <div className="relative z-10 flex flex-col items-center">
-                <div className="w-32 h-32 mb-4 overflow-hidden rounded-full border-4 border-white shadow-lg group-hover:border-yellow-100 transition-all duration-300">
+                <div
+                  className="w-32 h-32 mb-4 overflow-hidden rounded-full border-4 border-white shadow-lg transition-all duration-300"
+                  style={{
+                    borderColor: hoveredIndex === index ? `${RECYCLE_LEBANON_BLUE}66` : "#ffffff"
+                  }}
+                >
                   <img 
                     src={value.img} 
                     alt={value.text} 
@@ -68,7 +83,10 @@ const Mission = () => {
                 <h3 className="font-semibold text-center text-lg relative inline-block">
                   {value.text}
                   {/* Animated underline */}
-                  <span className="absolute -bottom-1 left-0 w-0 h-1 bg-yellow-400 transition-all duration-300 group-hover:w-full" />
+                  <span
+                    className="absolute -bottom-1 left-0 w-0 h-1 transition-all duration-300 group-hover:w-full"
+                    style={{ backgroundColor: RECYCLE_LEBANON_BLUE }}
+                  />
                 </h3>
               </div>
 
@@ -77,8 +95,9 @@ const Mission = () => {
                 {[...Array(6)].map((_, i) => (
                   <div
                     key={i}
-                    className="absolute w-2 h-2 bg-yellow-400/30 rounded-full animate-particle"
+                    className="absolute w-2 h-2 rounded-full animate-particle"
                     style={{
+                      backgroundColor: `${RECYCLE_LEBANON_BLUE}4D`, // translucent particles
                       left: `${Math.random() * 80 + 10}%`,
                       top: `${Math.random() * 80 + 10}%`,
                       animationDelay: `${i * 0.1}s`
@@ -90,8 +109,8 @@ const Mission = () => {
           ))}
         </div>
 
-        <p className="text-lg text-center max-w-3xl mx-auto opacity-0 animate-fade-in-up [animation-delay:200ms] [animation-fill-mode:forwards]">
-          Recycle Labanon stewards a holistic and action-oriented approach, tackling the cross-sectorial ecology
+        <p className="text-lg text-center max-w-3xl mx-auto opacity-0 animate-fade-in-up [animation-delay:200ms] [animation-fill-mode:forwards] text-gray-700">
+          Recycle Lebanon stewards a holistic and action-oriented approach, tackling the cross-sectorial ecology
           crisis through four interconnected programmes emphasising social justice, access to data, conscious
           consumption, art residency and agroecology bio-design alternatives.
         </p>

@@ -1,10 +1,13 @@
-/** @type {import('tailwindcss').Config} */
+// tailwind.config.js
 module.exports = {
   theme: {
     extend: {
       colors: {
-        brandBg: "#fdfefb",    // Navbar background color
-        brandGreen: "#000000ff", // Main green from PDF
+        brand: {
+          DEFAULT: "#002D9B", // Pantone 2726C
+          light: "#E6EEFA",  // very light background shade
+          dark: "#001A66",   // darker hover shade if needed
+        },
       },
     },
   },

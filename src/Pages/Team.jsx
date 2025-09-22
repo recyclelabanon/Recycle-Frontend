@@ -6,14 +6,11 @@ import TeamMember from '../components/TeamMember';
 import Partners from '../components/Partners';
 import { useTeamContext } from '../Admin/Context/TeamContext';
 
-const Team = () => {
-  const {
-    teams,
-    loading,
-    error,
-    refreshTeams,
-  } = useTeamContext();
+const BRAND_BLUE = "#2726CC";
+const BRAND_BLUE_HOVER = "#1f25a5";
 
+const Team = () => {
+  const { teams, loading, error, refreshTeams } = useTeamContext();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,22 +40,43 @@ const Team = () => {
       <Section title="Work With Us">
         <div className="max-w-4xl mx-auto mb-12">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-yellow-50 p-8 rounded-lg transition-transform duration-300 hover:-translate-y-1">
-              <h3 className="text-xl font-bold text-yellow-800 mb-4">Join Our Team</h3>
-              <p className="text-gray-700 mb-6">Be part of our mission to create sustainable change in Lebanon.</p>
-              <button 
-                onClick={handleClick} 
-                className="bg-yellow-600 text-white px-6 py-2 rounded-md hover:bg-yellow-700 transition-colors"
+            <div
+              className="p-8 rounded-lg transition-transform duration-300 hover:-translate-y-1"
+              style={{ backgroundColor: "#e0e0ff" }}
+            >
+              <h3 className="text-xl font-bold mb-4" style={{ color: BRAND_BLUE }}>
+                Join Our Team
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Be part of our mission to create sustainable change in Lebanon.
+              </p>
+              <button
+                onClick={handleClick}
+                className="px-6 py-2 rounded-md text-white transition-colors"
+                style={{ backgroundColor: BRAND_BLUE }}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE_HOVER)}
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE)}
               >
                 View Open Positions
               </button>
             </div>
-            <div className="bg-yellow-50 p-8 rounded-lg transition-transform duration-300 hover:-translate-y-1">
-              <h3 className="text-xl font-bold text-yellow-800 mb-4">Volunteer With Us</h3>
-              <p className="text-gray-700 mb-6">Contribute your time and skills to make a difference.</p>
-              <button 
-                onClick={handleClick} 
-                className="bg-yellow-600 text-white px-6 py-2 rounded-md hover:bg-yellow-700 transition-colors"
+
+            <div
+              className="p-8 rounded-lg transition-transform duration-300 hover:-translate-y-1"
+              style={{ backgroundColor: "#e0e0ff" }}
+            >
+              <h3 className="text-xl font-bold mb-4" style={{ color: BRAND_BLUE }}>
+                Volunteer With Us
+              </h3>
+              <p className="text-gray-700 mb-6">
+                Contribute your time and skills to make a difference.
+              </p>
+              <button
+                onClick={handleClick}
+                className="px-6 py-2 rounded-md text-white transition-colors"
+                style={{ backgroundColor: BRAND_BLUE }}
+                onMouseOver={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE_HOVER)}
+                onMouseOut={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE)}
               >
                 Explore Opportunities
               </button>
@@ -70,21 +88,23 @@ const Team = () => {
       {loading && <p className="text-center text-lg text-gray-600">Loading team members...</p>}
       {error && <p className="text-center text-red-500">{error}</p>}
 
-      {!loading && !error && Object.entries(categorizedTeams).map(([category, members]) => (
-        <Section key={category} title={category} dark>
-          <div className="flex flex-wrap justify-center gap-12">
-            {members.map(member => (
-              <TeamMember
-                key={member._id}
-                name={member.fullName}
-                role={member.position}
-                description={member.introduction}
-                image={member.profilePic}
-              />
-            ))}
-          </div>
-        </Section>
-      ))}
+      {!loading &&
+        !error &&
+        Object.entries(categorizedTeams).map(([category, members]) => (
+          <Section key={category} title={category} dark>
+            <div className="flex flex-wrap justify-center gap-12">
+              {members.map((member) => (
+                <TeamMember
+                  key={member._id}
+                  name={member.fullName}
+                  role={member.position}
+                  description={member.introduction}
+                  image={member.profilePic}
+                />
+              ))}
+            </div>
+          </Section>
+        ))}
 
       <Partners />
     </div>

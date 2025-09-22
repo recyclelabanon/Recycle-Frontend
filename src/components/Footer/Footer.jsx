@@ -2,6 +2,9 @@ import { Mail, Phone, MapPin, Linkedin } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../assets/Logo/Recycle-Lebanon-Logo1.png";
 
+const BRAND_BLUE = "#2726CC";
+const BRAND_BLUE_HOVER = "#1f25a5";
+
 const Footer = () => {
   const navigate = useNavigate();
 
@@ -34,7 +37,9 @@ const Footer = () => {
                 alt="Recycle Lebanon"
                 className="h-10 object-contain mr-3"
               />
-              <span className="font-bold text-lg">Recycle Lebanon</span>
+              <span className="font-bold text-lg" style={{ color: BRAND_BLUE }}>
+                Recycle Lebanon
+              </span>
             </div>
 
             {/* Description */}
@@ -49,7 +54,10 @@ const Footer = () => {
               href="https://www.linkedin.com/company/recyclelebanon/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-500 hover:text-green-600 transition-colors"
+              className="transition-colors"
+              style={{ color: BRAND_BLUE }}
+              onMouseOver={(e) => (e.currentTarget.style.color = BRAND_BLUE_HOVER)}
+              onMouseOut={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
             >
               <Linkedin className="h-6 w-6" />
             </a>
@@ -57,13 +65,18 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4" style={{ color: BRAND_BLUE }}>
+              Quick Links
+            </h3>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <button
                     onClick={() => navigate(link.path)}
-                    className="text-gray-600 hover:text-green-600 transition-colors"
+                    className="transition-colors"
+                    style={{ color: "#4B5563" }}
+                    onMouseOver={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
+                    onMouseOut={(e) => (e.currentTarget.style.color = "#4B5563")}
                   >
                     {link.name}
                   </button>
@@ -74,13 +87,18 @@ const Footer = () => {
 
           {/* Resources */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Resources</h3>
+            <h3 className="font-semibold mb-4" style={{ color: BRAND_BLUE }}>
+              Resources
+            </h3>
             <ul className="space-y-2">
               {resourceLinks.map((link, index) => (
                 <li key={index}>
                   <button
                     onClick={() => navigate(link.path)}
-                    className="text-gray-600 hover:text-green-600 transition-colors"
+                    className="transition-colors"
+                    style={{ color: "#4B5563" }}
+                    onMouseOver={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
+                    onMouseOut={(e) => (e.currentTarget.style.color = "#4B5563")}
                   >
                     {link.name}
                   </button>
@@ -91,28 +109,36 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Contact Us</h3>
+            <h3 className="font-semibold mb-4" style={{ color: BRAND_BLUE }}>
+              Contact Us
+            </h3>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-green-600 mt-1" />
+                <MapPin className="h-5 w-5" style={{ color: BRAND_BLUE }} />
                 <p className="text-gray-600">
                   Saint Louise Street, Kehdy Building, Fassouh, Beirut, Lebanon
                 </p>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-green-600" />
+                <Mail className="h-5 w-5" style={{ color: BRAND_BLUE }} />
                 <a
                   href="mailto:contact@recyclelebanon.org"
-                  className="text-gray-600 hover:text-green-600 transition-colors"
+                  className="transition-colors"
+                  style={{ color: "#4B5563" }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
+                  onMouseOut={(e) => (e.currentTarget.style.color = "#4B5563")}
                 >
                   contact@recyclelebanon.org
                 </a>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-green-600" />
+                <Phone className="h-5 w-5" style={{ color: BRAND_BLUE }} />
                 <a
                   href="tel:+96171131115"
-                  className="text-gray-600 hover:text-green-600 transition-colors"
+                  className="transition-colors"
+                  style={{ color: "#4B5563" }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
+                  onMouseOut={(e) => (e.currentTarget.style.color = "#4B5563")}
                 >
                   +961 71 131 115
                 </a>

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useNewsContext } from '../Admin/Context/NewsContext';
 
+const RECYCLE_LEBANON_BLUE = "#2726CC";
+
 const NewsDetail = () => {
   const { slug } = useParams();
   const { getNewsBySlug } = useNewsContext();
@@ -39,10 +41,17 @@ const NewsDetail = () => {
   if (error || !news) {
     return (
       <div className="container mx-auto px-4 py-16">
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <div
+          className="px-4 py-3 rounded border"
+          style={{ backgroundColor: `${RECYCLE_LEBANON_BLUE}20`, borderColor: RECYCLE_LEBANON_BLUE, color: RECYCLE_LEBANON_BLUE }}
+        >
           {error || 'News article not found'}
         </div>
-        <Link to="/news" className="mt-4 inline-block text-blue-600 hover:underline">
+        <Link
+          to="/news"
+          className="mt-4 inline-block font-medium hover:underline"
+          style={{ color: RECYCLE_LEBANON_BLUE }}
+        >
           ← Back to all news
         </Link>
       </div>
@@ -51,7 +60,11 @@ const NewsDetail = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
-      <Link to="/news" className="text-yellow-600 hover:text-yellow-800 mb-4 inline-block">
+      <Link
+        to="/news"
+        className="mb-4 inline-block font-medium hover:underline"
+        style={{ color: RECYCLE_LEBANON_BLUE }}
+      >
         ← Back to all news
       </Link>
       
@@ -64,7 +77,10 @@ const NewsDetail = () => {
         
         <div className="p-6 md:p-8">
           <div className="flex flex-wrap items-center mb-4">
-            <span className="text-sm font-semibold px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full mr-3">
+            <span
+              className="text-sm font-semibold px-3 py-1 rounded-full mr-3"
+              style={{ backgroundColor: `${RECYCLE_LEBANON_BLUE}20`, color: RECYCLE_LEBANON_BLUE }}
+            >
               {news.category || 'General'}
             </span>
             <span className="text-sm text-gray-500">
@@ -93,7 +109,6 @@ const NewsDetail = () => {
           )}
           
           <div className="prose max-w-none">
-            {/* Render content - you might want to use a Markdown renderer here if your content is in Markdown */}
             <div dangerouslySetInnerHTML={{ __html: news.content }}></div>
           </div>
           
@@ -103,7 +118,8 @@ const NewsDetail = () => {
                 {news.tags.map((tag, index) => (
                   <span 
                     key={index} 
-                    className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm"
+                    className="px-3 py-1 rounded-full text-sm"
+                    style={{ backgroundColor: `${RECYCLE_LEBANON_BLUE}10`, color: RECYCLE_LEBANON_BLUE }}
                   >
                     #{tag}
                   </span>
