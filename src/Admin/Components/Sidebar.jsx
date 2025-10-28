@@ -6,7 +6,8 @@ import {
   Newspaper, 
   Users, 
   Folder, 
-  MessageSquare 
+  MessageSquare,
+  Mail
 } from 'lucide-react';
 
 const navigation = [
@@ -17,6 +18,7 @@ const navigation = [
   { name: 'Teams', to: '/admin/teams', icon: Users },
   { name: 'Programs', to: '/admin/programs', icon: Folder },
   { name: 'Contacts', to: '/admin/contacts', icon: MessageSquare },
+   { name: 'Newsletters', to: '/admin/newsletter', icon: Mail },
 ];
 
 function Sidebar() {

@@ -1,129 +1,128 @@
-// Pages/Initiatives.jsx
-import Hero from '../components/Hero';
-import Section from '../components/Section';
-import { Link } from 'react-router-dom';
-
-const BRAND_BLUE = "#2726CC";
+import Hero from "../components/Hero";
+import Section from "../components/Section";
+import { Link } from "react-router-dom";
+import { img10, img12, img34, img41 } from "../assets/Image"; // Programme logos
 
 const Initiatives = () => {
   const programs = [
     {
-      id: 'regeneratehub',
-      title: 'RegenerateHub',
+      id: "regeneratehub",
+      title: "RegenerateHub",
+      logo: img34,
+      color: "#2726CC", // Blue/Purple
+      cta: "Explore RegenerateHub Platform",
       shortDescription:
-        'Our circular economy platform maps sustainable alternatives across Lebanon, visualizing data on waste flows, resource recovery, and ecological solutions. By connecting stakeholders and tracking impact metrics, we enable communities to transition toward regenerative systems. The platform features interactive tools for businesses, policymakers, and activists to collaborate on nature-positive solutions.',
+        "Our circular economy platform maps ecological alternatives across Lebanon, visualising data on waste flows, resource recovery, and regenerative practices. It connects stakeholders, tracks impact metrics, and enables communities to transition toward systemic, nature-positive models.",
       image:
-        'https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1951&q=80',
-      layout: 'right',
-      actions: ['Access Data Platform', 'Become a User'],
+        "https://images.unsplash.com/photo-1518364538800-6bae3c2ea0f2?auto=format&fit=crop&w=1951&q=80",
+      layout: "right",
     },
     {
-      id: 'ecosouk',
-      title: 'EcoSouk',
+      id: "ecosouk",
+      title: "EcoSouk",
+      logo: img12,
+      color: "#E84C3D", // Brand red
+      cta: "Visit EcoSouk",
       shortDescription:
-        "Lebanon's pioneering zero-waste marketplace brings together 150+ local artisans and eco-entrepreneurs offering plastic-free home goods, organic skincare, and sustainable alternatives. Our Hamra and Baskinta locations feature refill stations, upcycled crafts, and educational workshops. Each purchase supports ethical producers while reducing single-use plastic consumption through our innovative container return system.",
+        "Lebanon’s zero-waste marketplace connecting 150+ local artisans and eco-entrepreneurs. From refill stations and upcycled crafts to educational workshops, EcoSouk supports ethical producers and circular economies through community engagement.",
       image:
-        'https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
-      layout: 'left',
-      actions: ['Visit EcoSouk', 'Become a Producer'],
+        "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1974&q=80",
+      layout: "left",
     },
     {
-      id: 'terrapods',
-      title: 'TerraPods',
+      id: "terrapods",
+      title: "TerraPods",
+      logo: img41,
+      color: "#E5A33F", // Brand yellow
+      cta: "Create at TerraPods",
       shortDescription:
-        'This creative ecology center in Baskinta combines traditional farming with cutting-edge biodesign. Our 6,000m² site includes medicinal gardens, natural dye workshops, and artist residencies focused on ecological solutions. Visitors can join agroecology trainings, experiment with biomaterials in our makerspace, or stay in eco-cabins while developing projects that bridge sustainability and culture.',
+        "Our creative ecology centre in Baskinta merges traditional farming with biodesign innovation. TerraPods features gardens, natural dye studios, and residencies focused on ecological regeneration and cultural collaboration.",
       image:
-        'https://images.unsplash.com/photo-1464226184884-fa280b87c399?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80',
-      layout: 'right',
-      actions: ['Volunteer on the Farm', 'Apply for Residency'],
+        "https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&w=1950&q=80",
+      layout: "right",
     },
     {
-      id: 'diveintoaction',
-      title: 'Dive Into Action',
+      id: "diveintoaction",
+      title: "Dive Into Action",
+      logo: img10,
+      color: "#00A2C7", // Brand teal/blue
+      cta: "It Starts With You[th]",
       shortDescription:
-        'Engaging youth in hands-on environmental action, we have mobilized 8,000+ volunteers for beach cleanups, recycling drives, and urban greening projects. Our campaigns like #BalaPlastic have eliminated single-use plastics at major events while advocating for policy change. The program combines activism with practical skills training in waste management, community organizing, and sustainable living.',
+        "Youth-driven programme mobilising volunteers for cleanups, recycling drives, and urban greening. Through campaigns like #BalaPlastic, we combine activism, practical skills, and collective action for regenerative change.",
       image:
-        'https://images.unsplash.com/photo-1618477462146-050d2767eac4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
-      layout: 'left',
-      actions: ['Join a Clean Up', 'Start a Campaign'],
+        "https://images.unsplash.com/photo-1618477462146-050d2767eac4?auto=format&fit=crop&w=1974&q=80",
+      layout: "left",
     },
   ];
 
   return (
-    <div className="pt-16 bg-gray-100">
+    <div className="pt-16 bg-gray-50">
       <Hero
         title="Ecological Programmes"
-        subtitle="Fostering sustainable change through interconnected initiatives"
-        backgroundImage="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2013&q=80"
+        subtitle="Fostering ecological change through interconnected initiatives"
+        backgroundImage="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=2013&q=80"
       />
 
-      <Section title="Our Initiatives">
-        <div className="max-w-6xl mx-auto px-4 space-y-12 lg:space-y-16">
+      <Section title="Our Programmes">
+        <div className="max-w-6xl mx-auto px-6 md:px-10 lg:px-16 space-y-20">
           {programs.map((program) => (
             <div
               key={program.id}
               className={`group flex flex-col ${
-                program.layout === 'right' ? 'lg:flex-row' : 'lg:flex-row-reverse'
-              } gap-6 lg:gap-10 items-center p-6 rounded-2xl transition-all duration-300 bg-gray-100 hover:bg-white hover:shadow-lg`}
+                program.layout === "right"
+                  ? "lg:flex-row"
+                  : "lg:flex-row-reverse"
+              } gap-8 lg:gap-14 items-center p-6 md:p-8 lg:p-10 bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300`}
             >
               {/* Image */}
               <div className="lg:w-1/2 w-full relative overflow-hidden rounded-xl">
                 <img
                   src={program.image}
                   alt={program.title}
-                  className="w-full h-64 lg:h-80 object-cover rounded-xl transform transition-transform duration-300 group-hover:scale-105"
+                  className="w-full h-64 md:h-80 object-cover rounded-xl transform transition-transform duration-300 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent rounded-xl" />
               </div>
 
               {/* Content */}
-              <div className="lg:w-1/2 w-full space-y-5">
-                <h3 className="text-3xl font-bold text-gray-800">{program.title}</h3>
-                <p className="text-gray-600 text-lg leading-relaxed">{program.shortDescription}</p>
-
-                {/* Get Involved Section */}
-                <div className="space-y-3">
-                  <h4 className="font-semibold text-lg">Get Involved</h4>
-                  <div className="space-y-3">
-                    {program.actions.map((action, i) => (
-                      <button
-                        key={i}
-                        className="w-full"
-                        style={{
-                          backgroundColor: BRAND_BLUE,
-                          color: 'white',
-                        }}
-                        onMouseOver={(e) => (e.currentTarget.style.backgroundColor = '#1d22a0')}
-                        onMouseOut={(e) => (e.currentTarget.style.backgroundColor = BRAND_BLUE)}
-                      >
-                        {action}
-                      </button>
-                    ))}
+              <div className="lg:w-1/2 w-full space-y-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 flex-shrink-0 bg-white rounded-full shadow-md flex items-center justify-center p-2">
+                    <img
+                      src={program.logo}
+                      alt={`${program.title} logo`}
+                      className="w-full h-full object-contain"
+                    />
                   </div>
+                  <h3
+                    className="text-3xl font-extrabold font-brand tracking-tight"
+                    style={{ color: program.color }}
+                  >
+                    {program.title}
+                  </h3>
                 </div>
 
-                <Link
-                  to={`/initiatives/${program.id}`}
-                  className="inline-flex items-center font-medium gap-2 transition-colors"
-                  style={{ color: BRAND_BLUE }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = '#1d22a0')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = BRAND_BLUE)}
-                >
-                  <span>Explore Initiative</span>
-                  <svg
-                    className="w-5 h-5 transform transition-transform group-hover:translate-x-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <p className="text-gray-700 text-lg leading-relaxed">
+                  {program.shortDescription}
+                </p>
+
+                <div>
+                  <Link
+                    to={`/initiatives/${program.id}`}
+                    className="inline-block px-6 py-3 rounded-lg text-white font-semibold text-sm uppercase tracking-wide transition-all duration-300 shadow-md hover:shadow-lg"
+                    style={{
+                      backgroundColor: program.color,
+                    }}
+                    onMouseOver={(e) =>
+                      (e.currentTarget.style.backgroundColor = `${program.color}cc`)
+                    }
+                    onMouseOut={(e) =>
+                      (e.currentTarget.style.backgroundColor = program.color)
+                    }
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M17 8l4 4m0 0l-4 4m4-4H3"
-                    />
-                  </svg>
-                </Link>
+                    {program.cta}
+                  </Link>
+                </div>
               </div>
             </div>
           ))}

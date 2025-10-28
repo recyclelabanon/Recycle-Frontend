@@ -12,7 +12,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Configure axios defaults
   useEffect(() => {
     if (token) {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
@@ -20,38 +19,28 @@ export const AuthProvider = ({ children }) => {
       delete axios.defaults.headers.common['Authorization'];
     }
   }, [token]);
-  // Set up axios interceptors for error handling
 
-  // Check if user is authenticated on mount
   useEffect(() => {
     const verifyToken = async () => {
-      if (!token) {
-        setLoading(false);
-        return;
-      }
-
+      if (!token) return setLoading(false);
       try {
-        // You'll need to create this endpoint on your backend
-        const response = await axios.get(`${API_URL}/auth/me`);
-        setCurrentUser(response.data.user);
+        const res = await axios.get(`${API_URL}/auth/me`);
+        setCurrentUser(res.data.user);
       } catch (err) {
         console.error('Auth verification failed:', err);
-        logout(); // Token is invalid, log user out
+        logout();
       } finally {
         setLoading(false);
       }
     };
-
     verifyToken();
   }, [token]);
 
-  const register = async (userData) => {
+  const register = async (data) => {
     setError(null);
     try {
-      const response = await axios.post(`${API_URL}/auth/register`, userData);
-      const { token, user } = response.data;
-      
-      // Save token and set user
+      const res = await axios.post(`${API_URL}/auth/register`, data);
+      const { token, user } = res.data;
       localStorage.setItem('token', token);
       setToken(token);
       setCurrentUser(user);
@@ -62,13 +51,11 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const login = async (credentials) => {
+  const login = async (creds) => {
     setError(null);
     try {
-      const response = await axios.post(`${API_URL}/auth/login`, credentials);
-      const { token, user } = response.data;
-      
-      // Save token and set user
+      const res = await axios.post(`${API_URL}/auth/login`, creds);
+      const { token, user } = res.data;
       localStorage.setItem('token', token);
       setToken(token);
       setCurrentUser(user);
@@ -83,7 +70,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setToken(null);
     setCurrentUser(null);
-    // Clear authorization header
     delete axios.defaults.headers.common['Authorization'];
   };
 
@@ -98,14 +84,10 @@ export const AuthProvider = ({ children }) => {
     isAuthenticated: !!currentUser,
   };
 
-  return (
-    <AuthContext.Provider value={value}>
-      {children}
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
-// Custom hook to use the auth context
+// ✅ Add this at the bottom of the same file
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {

@@ -59,7 +59,7 @@ const Hero = () => {
       <div className="relative h-full flex items-center justify-center text-white px-4">
         <div className="max-w-4xl text-center space-y-8">
           <h1
-            className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up hover:scale-105 transition-transform duration-300 cursor-default"
+            className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up hover:scale-105 transition-transform duration-300 cursor-default leading-snug"
           >
             <span
               className="bg-clip-text text-transparent animate-text-glow"
@@ -68,16 +68,19 @@ const Hero = () => {
               }}
             >
               re[psych]le
-            </span>
-            <br className="md:hidden" /> the system, <br />
-            design out waste.
-            {/* Animated underline */}
-            <div
-              className="mt-4 mx-auto w-24 h-1 rounded-full transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"
-              style={{ backgroundColor: RECYCLE_LEBANON_BLUE }}
-            />
+            </span>{" "}
+            the system,
+            <br />
+            Design out waste.
           </h1>
 
+          {/* Animated underline under heading */}
+          <div
+            className="mt-2 mx-auto w-32 h-1 rounded-full transition-transform duration-500"
+            style={{ backgroundColor: RECYCLE_LEBANON_BLUE }}
+          />
+
+          {/* CTA Button */}
           <button
             className="text-white px-8 py-3 rounded-full flex items-center justify-center mx-auto transition-all 
                       transform hover:scale-105 hover:shadow-2xl active:scale-95 group relative overflow-hidden"

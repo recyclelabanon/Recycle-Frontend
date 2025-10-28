@@ -1,13 +1,15 @@
 import { useState } from "react";
+
 const useApi = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const sendRequest = async (url, method = 'GET', body = null, headers = {}) => {
+  const sendRequest = async (url, method = "GET", body = null, headers = {}) => {
     if (!(body instanceof FormData)) {
-      headers['Content-Type'] = 'application/json';
+      headers["Content-Type"] = "application/json";
     }
+
     setLoading(true);
     setError(null);
     setSuccess(null);
@@ -15,22 +17,38 @@ const useApi = () => {
     try {
       const config = {
         method,
-        headers: {
-          ...headers,
-        },
-        body: body instanceof FormData ? body : JSON.stringify(body),
+        headers,
       };
 
-      const response = await fetch(url, config);
-      const responseData = await response.json();
-
-      if (!response.ok) {
-        throw new Error(responseData.message || "Something went wrong");
+      if (body) {
+        config.body = body instanceof FormData ? body : JSON.stringify(body);
       }
 
-      setSuccess(responseData.message || "Request successful");
+      const response = await fetch(url, config);
+
+      // Try to safely parse JSON
+      let responseData = null;
+      try {
+        responseData = await response.json();
+      } catch (parseError) {
+        console.warn("Response is not valid JSON:", parseError);
+      }
+
+      // Handle error responses gracefully
+      if (!response.ok) {
+        const errorMessage =
+          (responseData && responseData.message) ||
+          `Request failed with status ${response.status}`;
+        throw new Error(errorMessage);
+      }
+
+      setSuccess(
+        (responseData && responseData.message) || "Request completed successfully"
+      );
+
       return responseData;
     } catch (err) {
+      console.error("API Error:", err.message);
       setError(err.message);
       throw err;
     } finally {

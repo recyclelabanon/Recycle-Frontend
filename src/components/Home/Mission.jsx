@@ -1,12 +1,12 @@
-import { useEffect, useRef, useState } from 'react';
+{/*import { useEffect, useRef, useState } from 'react';
 import Leaf from '/EcoTools/Empowerment.jpg';
 import Users from '/EcoTools/Abundance.jpg';
 import Heart from '/EcoTools/Liberation.jpg';
 import Sprout from '/EcoTools/solidarity.jpg';
 
-// Recycle Lebanon Blue
+
 const RECYCLE_LEBANON_BLUE = "#002D9B";
-const RECYCLE_LEBANON_BLUE_DARK = "#001f6e"; // darker shade
+const RECYCLE_LEBANON_BLUE_DARK = "#001f6e"; 
 
 const Mission = () => {
   const values = [
@@ -56,7 +56,7 @@ const Mission = () => {
                   : 'perspective(1000px) rotateX(0) rotateY(0) scale(1)'
               }}
             >
-              {/* Gradient border effect */}
+              
               <div
                 className="absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{
@@ -64,7 +64,7 @@ const Mission = () => {
                 }}
               />
               
-              {/* Card content */}
+              
               <div className="relative z-10 flex flex-col items-center">
                 <div
                   className="w-32 h-32 mb-4 overflow-hidden rounded-full border-4 border-white shadow-lg transition-all duration-300"
@@ -77,12 +77,12 @@ const Mission = () => {
                     alt={value.text} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  {/* Image overlay */}
+                  
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <h3 className="font-semibold text-center text-lg relative inline-block">
                   {value.text}
-                  {/* Animated underline */}
+                  
                   <span
                     className="absolute -bottom-1 left-0 w-0 h-1 transition-all duration-300 group-hover:w-full"
                     style={{ backgroundColor: RECYCLE_LEBANON_BLUE }}
@@ -90,14 +90,14 @@ const Mission = () => {
                 </h3>
               </div>
 
-              {/* Particle burst effect */}
+              
               <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                 {[...Array(6)].map((_, i) => (
                   <div
                     key={i}
                     className="absolute w-2 h-2 rounded-full animate-particle"
                     style={{
-                      backgroundColor: `${RECYCLE_LEBANON_BLUE}4D`, // translucent particles
+                      backgroundColor: `${RECYCLE_LEBANON_BLUE}4D`, 
                       left: `${Math.random() * 80 + 10}%`,
                       top: `${Math.random() * 80 + 10}%`,
                       animationDelay: `${i * 0.1}s`
@@ -119,4 +119,4 @@ const Mission = () => {
   );
 };
 
-export default Mission;
+export default Mission;*/}

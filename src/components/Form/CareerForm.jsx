@@ -11,6 +11,7 @@ const CareerForm = ({ onSuccess }) => {
     email: '',
     position: '',
     resume: null,
+    coverLetterFile: null,
     message: '',
   });
 
@@ -30,7 +31,10 @@ const CareerForm = ({ onSuccess }) => {
       formPayload.append('email', formData.email);
       formPayload.append('position', formData.position);
       formPayload.append('resume', formData.resume);
-      formPayload.append('coverLetter', formData.message);
+      formPayload.append('notes', formData.message); // renamed from coverLetter
+      if (formData.coverLetterFile) {
+        formPayload.append('coverLetterFile', formData.coverLetterFile);
+      }
 
       await sendRequest('https://recyclelabanonweb.onrender.com/api/career', 'POST', formPayload);
 
@@ -40,6 +44,7 @@ const CareerForm = ({ onSuccess }) => {
         email: '',
         position: '',
         resume: null,
+        coverLetterFile: null,
         message: '',
       });
     } catch (error) {
@@ -50,6 +55,7 @@ const CareerForm = ({ onSuccess }) => {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Full Name */}
         <div>
           <label className="block text-gray-700 mb-2">Full Name</label>
           <input
@@ -62,6 +68,8 @@ const CareerForm = ({ onSuccess }) => {
             style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
+
+        {/* Email */}
         <div>
           <label className="block text-gray-700 mb-2">Email</label>
           <input
@@ -74,6 +82,8 @@ const CareerForm = ({ onSuccess }) => {
             style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
+
+        {/* Position */}
         <div>
           <label className="block text-gray-700 mb-2">Position</label>
           <select
@@ -88,8 +98,11 @@ const CareerForm = ({ onSuccess }) => {
             <option value="Environmental Project Manager">Environmental Project Manager</option>
             <option value="Community Outreach Coordinator">Community Outreach Coordinator</option>
             <option value="Sustainability Consultant">Sustainability Consultant</option>
+            <option value="Other">Other</option>
           </select>
         </div>
+
+        {/* Resume Upload */}
         <div>
           <label className="block text-gray-700 mb-2">Resume</label>
           <input
@@ -102,11 +115,25 @@ const CareerForm = ({ onSuccess }) => {
             style={{ '--tw-ring-color': BRAND_BLUE }}
           />
         </div>
+
+        {/* Cover Letter File Upload */}
+        <div>
+          <label className="block text-gray-700 mb-2">Upload Cover Letter (optional)</label>
+          <input
+            type="file"
+            name="coverLetterFile"
+            onChange={handleChange}
+            accept=".pdf,.doc,.docx"
+            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[BRAND_BLUE] focus:border-transparent"
+            style={{ '--tw-ring-color': BRAND_BLUE }}
+          />
+        </div>
+
+        {/* Notes Field */}
         <div className="col-span-full">
-          <label className="block text-gray-700 mb-2">Cover Letter</label>
+          <label className="block text-gray-700 mb-2">Notes</label>
           <textarea
             name="message"
-            required
             value={formData.message}
             onChange={handleChange}
             className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[BRAND_BLUE] focus:border-transparent"
@@ -115,6 +142,7 @@ const CareerForm = ({ onSuccess }) => {
           />
         </div>
       </div>
+
       <button
         type="submit"
         className="w-full text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-800 transition-colors"

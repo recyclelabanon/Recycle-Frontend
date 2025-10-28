@@ -64,8 +64,9 @@ const AboutUs = () => {
         </>
       ),
       image: {
-        src: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=1471",
-        alt: "Waste crisis",
+        // ✅ Changed background image as per client feedback
+        src: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=1471", // replace with final approved one
+        alt: "Updated background for Our Story",
         position: "right"
       }
     }
@@ -74,32 +75,40 @@ const AboutUs = () => {
   const impactPrograms = [
     {
       title: "RegenerateHub",
-      description: "Propels data driven community engagement, fostering climate-driven practices and resilient ecosystems.",
+      description:
+        "Propels data driven community engagement, fostering climate-driven practices and resilient ecosystems.",
       logo: img34,
+      color: BRAND_BLUE, // Brand blue
       bgColor: "bg-[#2726CC]/10",
-      hoverColor: "hover:bg-[#2726CC]/20"
+      hoverColor: "hover:bg-[#2726CC]/20",
     },
     {
       title: "EcoSouk",
-      description: "Nurtures conscious living and local economies, connecting makers and consumers.",
+      description:
+        "Nurtures conscious living and local economies, connecting makers and consumers.",
       logo: img12,
-      bgColor: "bg-[#2726CC]/10",
-      hoverColor: "hover:bg-[#2726CC]/20"
+      color: "#0FA958", // Brand green
+      bgColor: "bg-[#0FA958]/10",
+      hoverColor: "hover:bg-[#0FA958]/20",
     },
     {
       title: "TerraPods",
-      description: "Fosters innovation and self sufficiency through STEAM-driven collaboration.",
+      description:
+        "Fosters innovation and self sufficiency through STEAM-driven collaboration.",
       logo: img41,
-      bgColor: "bg-[#2726CC]/10",
-      hoverColor: "hover:bg-[#2726CC]/20"
+      color: "#E5A33F", // Brand orange
+      bgColor: "bg-[#E5A33F]/10",
+      hoverColor: "hover:bg-[#E5A33F]/20",
     },
     {
       title: "Dive Into Action",
-      description: "Sparks a transformative shift toward environmental conscious actions.",
+      description:
+        "Sparks a transformative shift toward environmental conscious actions.",
       logo: img10,
-      bgColor: "bg-[#2726CC]/10",
-      hoverColor: "hover:bg-[#2726CC]/20"
-    }
+      color: "#00A2C7", // Brand teal
+      bgColor: "bg-[#00A2C7]/10",
+      hoverColor: "hover:bg-[#00A2C7]/20",
+    },
   ];
 
   const mission = contentSections.find(section => section.title === "Our Mission");
@@ -110,7 +119,7 @@ const AboutUs = () => {
     <div className="pt-16">
       <Hero
         title="Founding Roots"
-        subtitle="Catalyzing systemic change through creative ecology since 2015"
+        subtitle="Catalysing systemic change through creative ecology since 2015"
         backgroundImage="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2013&q=80"
       />
 
@@ -136,66 +145,6 @@ const AboutUs = () => {
         </div>
       </Section>
 
-      {/* Our Vision */}
-      <Section title={vision.title} dark={vision.dark}>
-        <div className={`max-w-6xl mx-auto flex flex-col-reverse ${vision.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
-          <div className="md:w-1/2">
-            <div className={`prose ${vision.dark ? 'prose-invert' : ''} prose-lg`}>
-              {vision.content}
-            </div>
-          </div>
-          <div className="md:w-1/2">
-            <div className="rounded-xl overflow-hidden shadow-sm">
-              <img
-                src={vision.image.src}
-                alt={vision.image.alt}
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover"
-              />
-            </div>
-          </div>
-        </div>
-      </Section>
-
-      {/* Impact Statement */}
-      <Section title="Impact Statement">
-        <div className="max-w-5xl mx-auto">
-          <div className="prose prose-lg max-w-4xl mx-auto mb-8">
-            <p className="text-lg leading-relaxed">
-              As a committed advocate for transformative impact, Recycle Lebanon&apos;s holistic programmes shape our
-              interconnected future, fostering resilience and cultivating ecological tools for collective liberation.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-6 mt-8">
-            {impactPrograms.map((program, index) => (
-              <Link
-                to={`/initiatives/${program.title.replace(/\s+/g, '').toLowerCase()}`} 
-                key={index} 
-                className={`${program.bgColor} ${program.hoverColor} rounded-lg p-6 transition-all duration-300 hover:shadow-md flex flex-col cursor-pointer`}
-              >
-                <div className="flex items-center mb-4">
-                  <div className="w-16 h-16 mr-4 flex-shrink-0 bg-white rounded-full shadow-md flex items-center justify-center p-2">
-                    <img
-                      src={program.logo}
-                      alt={`${program.title} logo`}
-                      width={64}
-                      height={64}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                  <h3 className="text-xl font-semibold" style={{ color: BRAND_BLUE }}>
-                    {program.title}
-                  </h3>
-                </div>
-                <p className="text-gray-700 mt-2">{program.description}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </Section>
-
       {/* Our Story */}
       <Section title={story.title} dark={story.dark}>
         <div className={`max-w-6xl mx-auto flex flex-col-reverse ${story.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
@@ -209,6 +158,79 @@ const AboutUs = () => {
               <img
                 src={story.image.src}
                 alt={story.image.alt}
+                width={600}
+                height={400}
+                className="w-full h-auto object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </Section>
+
+
+
+      {/* Impact Statement */}
+      <Section title="Impact Statement">
+        <div className="max-w-5xl mx-auto">
+          <div className="prose prose-lg max-w-4xl mx-auto mb-8">
+            <p className="text-lg leading-relaxed">
+              As a committed advocate for transformative impact, Recycle Lebanon&apos;s holistic programmes shape our
+              interconnected future, fostering resilience and cultivating ecological tools for collective liberation.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-8">
+            {impactPrograms.map((program, index) => (
+              <Link
+                to={`/initiatives/${program.title.replace(/\s+/g, '').toLowerCase()}`}
+                key={index}
+                className={`${program.bgColor} ${program.hoverColor} rounded-xl p-6 transition-all duration-300 hover:shadow-lg flex flex-col cursor-pointer`}
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-16 h-16 mr-4 flex-shrink-0 bg-white rounded-full shadow-md flex items-center justify-center p-2">
+                    <img
+                      src={program.logo}
+                      alt={`${program.title} logo`}
+                      width={64}
+                      height={64}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+
+                  {/* Brand-specific heading styling */}
+                  <h3
+                    className="text-2xl font-brand font-extrabold uppercase tracking-tight"
+                    style={{
+                      color: program.color, // uses brand palette
+                      fontFamily: "'Montserrat', 'Helvetica Neue', Arial, sans-serif", // fallback until brand font imported
+                      letterSpacing: '0.5px',
+                    }}
+                  >
+                    {program.title}
+                  </h3>
+                </div>
+
+                <p className="text-gray-700 mt-2 leading-relaxed">{program.description}</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+
+      {/* Our Vision */}
+      <Section title={vision.title} dark={vision.dark}>
+        <div className={`max-w-6xl mx-auto flex flex-col-reverse ${vision.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
+          <div className="md:w-1/2">
+            <div className={`prose ${vision.dark ? 'prose-invert' : ''} prose-lg`}>
+              {vision.content}
+            </div>
+          </div>
+          <div className="md:w-1/2">
+            <div className="rounded-xl overflow-hidden shadow-sm">
+              <img
+                src={vision.image.src}
+                alt={vision.image.alt}
                 width={600}
                 height={400}
                 className="w-full h-auto object-cover"

@@ -41,7 +41,7 @@ const NewsPage = () => {
     <div className="pt-16">
       <Hero
         title="Latest News"
-        subtitle="Stay updated with the most recent news and press releases from our organization."
+        subtitle="Discover stories, insights, and updates driving ecological change across our network."
         backgroundImage="https://img.freepik.com/free-photo/media-press-release-newsletter-update-concept_53876-120580.jpg"
       />
 
