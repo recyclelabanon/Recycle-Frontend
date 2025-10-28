@@ -1,11 +1,18 @@
 import { useState } from "react";
 
+// ✅ Automatically switch between local and deployed backend
+const API_BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5000/api/v1"
+    : "https://recycle-backend-07zo.onrender.com/api/v1";
+
 const useApi = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const sendRequest = async (url, method = "GET", body = null, headers = {}) => {
+  // 🔹 Core Request Function
+  const sendRequest = async (endpoint, method = "GET", body = null, headers = {}) => {
     if (!(body instanceof FormData)) {
       headers["Content-Type"] = "application/json";
     }
@@ -24,22 +31,24 @@ const useApi = () => {
         config.body = body instanceof FormData ? body : JSON.stringify(body);
       }
 
+      const url = endpoint.startsWith("http")
+        ? endpoint
+        : `${API_BASE_URL}${endpoint.startsWith("/") ? "" : "/"}${endpoint}`;
+
       const response = await fetch(url, config);
 
-      // Try to safely parse JSON
       let responseData = null;
       try {
         responseData = await response.json();
-      } catch (parseError) {
-        console.warn("Response is not valid JSON:", parseError);
+      } catch {
+        console.warn("Response is not valid JSON");
       }
 
-      // Handle error responses gracefully
       if (!response.ok) {
-        const errorMessage =
+        const message =
           (responseData && responseData.message) ||
           `Request failed with status ${response.status}`;
-        throw new Error(errorMessage);
+        throw new Error(message);
       }
 
       setSuccess(
@@ -56,7 +65,28 @@ const useApi = () => {
     }
   };
 
-  return { sendRequest, loading, error, success };
+  // 🔹 Newsletter API helpers
+  const subscribeToNewsletter = async (email) => {
+    return await sendRequest("/subscribe", "POST", { email });
+  };
+
+  const getAllSubscribers = async () => {
+    return await sendRequest("/subscribe", "GET");
+  };
+
+  const deleteSubscriber = async (id) => {
+    return await sendRequest(`/subscribe/${id}`, "DELETE");
+  };
+
+  return {
+    sendRequest,
+    subscribeToNewsletter,
+    getAllSubscribers,
+    deleteSubscriber,
+    loading,
+    error,
+    success,
+  };
 };
 
 export default useApi;

@@ -7,20 +7,24 @@ import logo from "../../assets/Logo/Recycle-Lebanon-Logo1.png";
 const BRAND_BLUE = "#2726CC";
 const BRAND_BLUE_HOVER = "#1f25a5";
 
+// ✅ Auto-detect environment
+const API_BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5000/api/v1"
+    : "https://recycle-backend-07zo.onrender.com/api/v1";
+
 const Footer = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const { sendRequest, loading } = useApi();
+  const { sendRequest, loading, error, success } = useApi();
   const [successMessage, setSuccessMessage] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await sendRequest(
-        "https://recyclelabanonweb.onrender.com/api/subscribe",
-        "POST",
-        { email }
-      );
+      // ✅ Works for both local & live backend
+      await sendRequest(`${API_BASE_URL}/subscribe`, "POST", { email });
+
       setSuccessMessage("You have subscribed successfully! 🎉");
       setEmail("");
       setTimeout(() => setSuccessMessage(""), 3000);
@@ -32,7 +36,7 @@ const Footer = () => {
 
   return (
     <footer className="bg-white mt-auto w-full border-t border-gray-200">
-      {/* 📬 Compact Newsletter CTA */}
+      {/* 📬 Newsletter Subscription */}
       <div className="w-full text-center py-6 px-4 md:py-8 border-b border-gray-100">
         <h3
           className="text-lg md:text-xl font-semibold mb-3"
@@ -44,7 +48,7 @@ const Footer = () => {
           Join our journey and receive reflections of our environmental impact.
         </p>
 
-        {successMessage && (
+        {(successMessage || error || success) && (
           <div
             className="mb-4 p-3 rounded-lg inline-flex items-center text-sm font-medium"
             style={{
@@ -55,7 +59,7 @@ const Footer = () => {
             }}
           >
             <CheckCircle className="w-5 h-5 mr-2" />
-            {successMessage}
+            {successMessage || success || error}
           </div>
         )}
 
@@ -129,7 +133,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* 🌿 Footer Content */}
+      {/* 🌿 Footer Info Section */}
       <div className="container mx-auto px-4 py-8 md:py-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {/* About + LinkedIn */}
@@ -167,7 +171,7 @@ const Footer = () => {
             </a>
           </div>
 
-          {/* Contact */}
+          {/* Contact Info */}
           <div className="flex flex-col space-y-3 text-sm md:text-base">
             <h3 className="font-semibold" style={{ color: BRAND_BLUE }}>
               Contact Us
