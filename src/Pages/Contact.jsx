@@ -1,14 +1,32 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import Contact from "../components/Contact";
 import Hero from "../components/Hero";
 
+
 const Contacts = () => {
+  const [heroData, setHeroData] = useState(null);
+
+  useEffect(() => {
+    const fetchHero = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/v1/contact-hero');
+        setHeroData(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchHero();
+  }, []);
+
+  if (!heroData) return <p>Loading...</p>;
+
   return (
     <div>
       <Hero
-        title="Connect with Us"
-        subtitle="We'd love to hear from you. Please fill out the form below to get in touch."
-        backgroundImage="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg"
-
+        title={heroData.title}
+        subtitle={heroData.subtitle}
+        backgroundImage={heroData.backgroundImage}
       />
       <Contact />
     </div>

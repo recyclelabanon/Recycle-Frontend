@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { Sprout } from "lucide-react"; // icon representing seed/tree/root
+import { useEffect, useState } from "react";
+import { Sprout } from "lucide-react";
 import useApi from "../../Hooks/useApi.js";
 
 const BRAND_BLUE = "#2726CC";
 
 const Donate = () => {
   const { sendRequest, loading, error, success } = useApi();
+
+  const [heroContent, setHeroContent] = useState({
+    title: "",
+    subtitle: ""
+  });
+
   const [donationType, setDonationType] = useState(null);
   const [amount, setAmount] = useState(100);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -18,6 +25,21 @@ const Donate = () => {
   });
 
   const predefinedAmounts = [25, 50, 100, 250, 500];
+
+  // ✅ Fetch Donation Hero section text
+  useEffect(() => {
+    fetch("http://localhost:5000/api/v1/donation-hero")
+      .then(res => res.json())
+      .then(data => {
+        if (data) {
+          setHeroContent({
+            title: data.title,
+            subtitle: data.subtitle
+          });
+        }
+      })
+      .catch(() => console.log("Failed to load donation hero text"));
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -42,7 +64,7 @@ const Donate = () => {
 
     try {
       await sendRequest(
-        "https://recyclelabanonweb.onrender.com/api/donation",
+        "http://localhost:5000/api/v1/donation",
         "POST",
         donationData
       );
@@ -58,10 +80,11 @@ const Donate = () => {
         supportSection: "",
       });
     } catch (error) {
-      error.response && alert(error.response.data.message);
+      alert(error.response?.data?.message || "Something went wrong");
     }
   };
 
+  // ✅ Success Message (only once)
   if (success) {
     return (
       <div className="bg-gray-50 flex items-center justify-center py-16">
@@ -93,13 +116,10 @@ const Donate = () => {
           <div className="max-w-3xl mx-auto text-center">
             <Sprout className="h-12 w-12 mx-auto mb-6" style={{ color: BRAND_BLUE }} />
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Seeds of change begin with you – plant them today.
+              {heroContent.title}
             </h2>
             <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-              Seed a one-time gift or nurture monthly blooms to cultivate impact.
-              <br />
-              Every contribution grows our shared vision for a collective future
-              and thriving planet.
+              {heroContent.subtitle}
             </p>
 
             <div className="flex flex-wrap justify-center gap-3">
@@ -166,9 +186,7 @@ const Donate = () => {
               <form onSubmit={handleDonate}>
                 {/* Personal Info */}
                 <div className="mb-8">
-                  <h3 className="text-xl font-semibold mb-4">
-                    Personal Information
-                  </h3>
+                  <h3 className="text-xl font-semibold mb-4">Personal Information</h3>
                   <div className="space-y-4">
                     <input
                       type="text"
@@ -177,7 +195,7 @@ const Donate = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent"
+                      className="w-full px-4 py-3 border rounded-lg"
                     />
                     <input
                       type="email"
@@ -186,18 +204,17 @@ const Donate = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent"
+                      className="w-full px-4 py-3 border rounded-lg"
                     />
                     <textarea
                       name="message"
                       placeholder="Optional Message (e.g. dedication note)"
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent"
+                      className="w-full px-4 py-3 border rounded-lg"
                       rows="3"
                     ></textarea>
 
-                    {/* Anonymous Donation Option */}
                     <label className="flex items-center space-x-2">
                       <input
                         type="checkbox"
@@ -210,7 +227,7 @@ const Donate = () => {
                   </div>
                 </div>
 
-                {/* Plant a Seed Section */}
+                {/* Plant Seed */}
                 <div className="mb-8">
                   <h3 className="text-xl font-semibold mb-4">Plant a seed in your name</h3>
                   <input
@@ -219,7 +236,7 @@ const Donate = () => {
                     placeholder="Write a plant or tree name (optional)"
                     value={formData.seedName}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent"
+                    className="w-full px-4 py-3 border rounded-lg"
                   />
                 </div>
 
@@ -241,7 +258,7 @@ const Donate = () => {
                   </select>
                 </div>
 
-                {/* Amount Selection */}
+                {/* Amount Buttons */}
                 <div className="mb-8">
                   <h3 className="text-xl font-semibold mb-4">Select Amount</h3>
                   <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
@@ -254,11 +271,7 @@ const Donate = () => {
                             ? "text-white"
                             : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                         }`}
-                        style={
-                          amount === preset
-                            ? { backgroundColor: BRAND_BLUE }
-                            : {}
-                        }
+                        style={amount === preset ? { backgroundColor: BRAND_BLUE } : {}}
                         onClick={() => setAmount(preset)}
                       >
                         ${preset}
@@ -271,14 +284,12 @@ const Donate = () => {
                 <div className="mb-8">
                   <h3 className="text-xl font-semibold mb-4">Custom Amount</h3>
                   <div className="relative">
-                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">
-                      $
-                    </span>
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500">$</span>
                     <input
                       type="number"
                       value={amount}
                       onChange={(e) => setAmount(Number(e.target.value))}
-                      className="w-full pl-8 pr-4 py-3 border rounded-lg focus:ring-2 focus:border-transparent"
+                      className="w-full pl-8 pr-4 py-3 border rounded-lg"
                       min="1"
                       required
                     />
@@ -287,7 +298,7 @@ const Donate = () => {
 
                 {error && <div className="mb-4 text-red-600">{error}</div>}
 
-                {/* Submit Button */}
+                {/* Submit */}
                 <button
                   type="submit"
                   disabled={loading}
@@ -296,9 +307,7 @@ const Donate = () => {
                 >
                   {loading
                     ? "Processing..."
-                    : `Donate $${amount} ${
-                        donationType === "monthly" ? "Monthly" : "Now"
-                      }`}
+                    : `Donate $${amount} ${donationType === "monthly" ? "Monthly" : "Now"}`}
                 </button>
               </form>
             </div>

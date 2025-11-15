@@ -1,16 +1,37 @@
 import { ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const RECYCLE_LEBANON_BLUE = "#2726CC";
+const API = import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 const Hero = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [heroData, setHeroData] = useState({
+    title: "",
+    subtitle: "",
+    buttonText: "",
+    backgroundImage: "",
+  });
+
+  useEffect(() => {
+    fetch(`${API}/api/v1/home-hero/public`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) setHeroData(data);
+      })
+      .catch((err) => console.log("Hero fetch error:", err));
+  }, []);
+
 
   const handleMouseMove = (e) => {
     const { clientX, clientY } = e;
     const { left, top } = e.currentTarget.getBoundingClientRect();
     setMousePosition({ x: clientX - left, y: clientY - top });
   };
+
+  const bgImage = heroData.backgroundImage
+    ? `${API}${heroData.backgroundImage}`
+    : "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b"; // fallback
 
   return (
     <section
@@ -30,14 +51,14 @@ const Hero = () => {
         <div className="relative h-full">
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-black/30" />
           <img
-            src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b"
+            src={bgImage}
             alt="Sustainability"
             className="w-full h-full object-cover animate-image-pan"
           />
         </div>
       </div>
 
-      {/* Floating Particles */}
+      {/* Floating particles */}
       <div className="absolute inset-0 pointer-events-none">
         {[...Array(20)].map((_, i) => (
           <div
@@ -57,23 +78,18 @@ const Hero = () => {
       {/* Content */}
       <div className="relative h-full flex items-center justify-center text-white px-4">
         <div className="max-w-4xl text-center space-y-8">
-          <h1
-            className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up hover:scale-105 transition-transform duration-300 cursor-default leading-snug"
-          >
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up hover:scale-105 transition-transform duration-300 cursor-default leading-snug">
             <span
               className="bg-clip-text text-transparent animate-text-glow"
               style={{
                 backgroundImage: `linear-gradient(to right, ${RECYCLE_LEBANON_BLUE}, ${RECYCLE_LEBANON_BLUE})`,
               }}
             >
-              re[psych]le
-            </span>{" "}
-            the system,
+              {heroData.title || "re[psych]le"}
+            </span>
             <br />
-            Design out waste.
+            {heroData.subtitle || "the system, Design out waste."}
           </h1>
-
-          {/* Removed blue underline here */}
 
           {/* CTA Button */}
           <button
@@ -89,7 +105,7 @@ const Hero = () => {
               }}
             />
             <span className="relative flex items-center">
-              Learn More
+              {heroData.buttonText || "Learn More"}
               <ChevronRight className="ml-2 h-5 w-5 inline-block transition-transform group-hover:translate-x-1" />
             </span>
             <span className="absolute inset-0 animate-ripple opacity-0 group-active:opacity-30 bg-white/30 rounded-full" />

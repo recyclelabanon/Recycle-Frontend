@@ -1,24 +1,60 @@
 import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  FileText, 
-  Calendar, 
-  Newspaper, 
-  Users, 
-  Folder, 
+import {
+  LayoutDashboard,
+  FileText,
+  Calendar,
+  Newspaper,
+  Users,
+  Folder,
   MessageSquare,
-  Mail
+  Mail,
+  Image,
+  Sprout,
+  Blocks,
+  Handshake,
+  Quote,
+  ImageIcon,
+  UserCog,
+  Building2,
+  Edit3,
+  Eye,
+  BookOpenText,
 } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', to: '/admin', icon: LayoutDashboard },
+  { name: 'Home Hero', to: '/admin/home-hero', icon: Image },
+  { name: 'Donation Hero', to: '/admin/donation-hero', icon: Sprout },
+  { name: 'Homepage Work', to: '/admin/homepage-work', icon: Blocks },
+  { name: 'Homepage Participate', to: '/admin/homepage-participate', icon: Handshake },
+  { name: 'Hire Us', to: '/admin/hire-us', icon: Handshake },
+  { name: 'Quote Section', to: '/admin/quote', icon: Quote },
+  { name: 'Newsletter Settings', to: '/admin/newsletter-settings', icon: Mail },
+  { name: 'Subscribers', to: '/admin/subscribers', icon: Users },
+  { name: 'Footer Settings', to: '/admin/footer-settings', icon: ImageIcon },
+
+  { name: 'About Us', to: '/admin/about-us', icon: FileText },
+  { name: 'Team Admin', to: '/admin/team-admin', icon: UserCog },
+  { name: 'Partner Admin', to: '/admin/partner-admin', icon: Building2 },
+  { name: 'Initiatives Admin', to: '/admin/initiatives', icon: Sprout },
+
+
+  { name: 'Contacts', to: '/admin/contacts', icon: MessageSquare },
+  { name: 'Contact Editor', to: '/admin/contact-editor', icon: Edit3 },
+   { name: 'Contact Hero', to: '/admin/contact-hero', icon: Sprout },
+  { name: 'Messages', to: '/admin/messages', icon: Eye },
+  { name: 'Programmes Editor', to: '/admin/programmes-editor', icon: BookOpenText },
+  { name: 'Admin Donation Page Hero', to: '/admin/donation-page-hero', icon: Sprout },
+
+
+
   { name: 'Blogs', to: '/admin/blogs', icon: FileText },
   { name: 'Events', to: '/admin/events', icon: Calendar },
   { name: 'News', to: '/admin/news', icon: Newspaper },
   { name: 'Teams', to: '/admin/teams', icon: Users },
   { name: 'Programs', to: '/admin/programs', icon: Folder },
   { name: 'Contacts', to: '/admin/contacts', icon: MessageSquare },
-   { name: 'Newsletters', to: '/admin/newsletter', icon: Mail },
+  { name: 'Newsletters', to: '/admin/newsletter', icon: Mail },
 ];
 
 function Sidebar() {
@@ -37,10 +73,9 @@ function Sidebar() {
                   key={item.name}
                   to={item.to}
                   className={({ isActive }) =>
-                    `group flex items-center px-2 py-2 text-sm font-medium rounded-md ${
-                      isActive
-                        ? 'bg-gray-100 text-gray-900'
-                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                    `group flex items-center px-2 py-2 text-sm font-medium rounded-md ${isActive
+                      ? 'bg-gray-100 text-gray-900'
+                      : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                     }`
                   }
                 >

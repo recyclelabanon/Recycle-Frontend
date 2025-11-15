@@ -1,78 +1,40 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Hero from "../components/Hero";
+import Section from "../components/Section";
 import { img10, img12, img34, img41 } from '../assets/Image';
-import Hero from '../components/Hero';
-import Section from '../components/Section';
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const BRAND_BLUE = "#2726CC";
+const BRAND_BLUE = "#2726CC"; 
 
 const AboutUs = () => {
-  const contentSections = [
-    {
-      title: "Our Mission",
-      dark: false,
-      content: (
-        <p className="text-lg leading-relaxed mb-6">
-          We steward an interconnected approach to tackle the cross-sectorial ecology crisis.
-          Established in 2015, Recycle Lebanon is a trailblazing Lebanese NGO on a mission to catalyse
-          systemic change through creative ecology.
-        </p>
-      ),
-      image: {
-        src: "https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?q=80&w=1470",
-        alt: "Team working together",
-        position: "right"
-      }
-    },
-    {
-      title: "Our Vision",
-      dark: true,
-      content: (
-        <>
-          <p className="text-lg leading-relaxed mb-6">
-            Recycle Lebanon stewards a holistic and action-oriented approach, tackling the cross-sectorial ecology
-            crisis through four interconnected programmes.
-          </p>
-          <p className="text-lg leading-relaxed">
-            We aim to model a circular economy and demonstrate the viability of regenerative practices to inspire
-            others with practical, and hands-on examples to join us in growing a circular future.
-          </p>
-        </>
-      ),
-      image: {
-        src: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1632",
-        alt: "Sustainable vision",
-        position: "left"
-      }
-    },
-    {
-      title: "Our Story",
-      dark: true,
-      content: (
-        <>
-          <p className="text-lg leading-relaxed mb-6">
-            The waste crisis was the last [plastic] straw in a crippling state where water, electricity, air quality, and
-            basic rights dance in complacent corruption.
-          </p>
-          <p className="text-lg leading-relaxed mb-6">
-            Recycle Lebanon - a pun to re[psy]cle the system from mindsets to actions.
-          </p>
-          <p className="text-lg leading-relaxed">
-            The name of the NGO Recycle Lebanon is a pun, encapsulating our mission to re[psy]cle the system,
-            fostering a shift from conventional linear mindsets towards actions that embrace an environmentally
-            conscious approach.
-          </p>
-        </>
-      ),
-      image: {
-        // ✅ Changed background image as per client feedback
-        src: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=1471", // replace with final approved one
-        alt: "Updated background for Our Story",
-        position: "right"
-      }
-    }
-  ];
+  const [about, setAbout] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const impactPrograms = [
+  // ✅ Fetch About Us content from backend
+  useEffect(() => {
+    const fetchAbout = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/v1/aboutus");
+        setAbout(res.data.data);
+      } catch (error) {
+        console.error("Failed to fetch About Us data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchAbout();
+  }, []);
+
+  if (loading) return <div className="text-center py-10">Loading...</div>;
+  if (!about)
+    return (
+      <div className="text-center py-10 text-red-500">
+        No About Us data found
+      </div>
+    );
+
+    const impactPrograms = [
     {
       title: "RegenerateHub",
       description:
@@ -111,63 +73,91 @@ const AboutUs = () => {
     },
   ];
 
-  const mission = contentSections.find(section => section.title === "Our Mission");
-  const vision = contentSections.find(section => section.title === "Our Vision");
-  const story = contentSections.find(section => section.title === "Our Story");
+  // ✅ Pull hero and sections dynamically
+  const mission = about.sections?.find((s) => s.title === "Our Mission") || about.sections[0];
+  const story = about.sections?.find((s) => s.title === "Our Story") || about.sections[1];
+  const vision = about.sections?.find((s) => s.title === "Our Vision") || about.sections[2];
 
   return (
     <div className="pt-16">
+      {/* 🟦 Hero Section */}
       <Hero
-        title="Founding Roots"
-        subtitle="Catalysing systemic change through creative ecology since 2015"
-        backgroundImage="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2013&q=80"
+        title={about.hero?.title || "Founding Roots"}
+        subtitle={
+          about.hero?.subtitle ||
+          "Catalysing systemic change through creative ecology since 2015"
+        }
+        backgroundImage={
+          about.hero?.background?.url ||
+          "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2013&q=80"
+        }
       />
 
-      {/* Our Mission */}
-      <Section title={mission.title} dark={mission.dark}>
-        <div className={`max-w-6xl mx-auto flex flex-col-reverse ${mission.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
-          <div className="md:w-1/2">
-            <div className={`prose ${mission.dark ? 'prose-invert' : ''} prose-lg`}>
-              {mission.content}
-            </div>
-          </div>
-          <div className="md:w-1/2">
-            <div className="rounded-xl overflow-hidden shadow-sm">
-              <img
-                src={mission.image.src}
-                alt={mission.image.alt}
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover"
+      {/* 🟩 Our Mission */}
+      {mission && (
+        <Section title={mission.title} dark={mission.dark || false}>
+          <div
+            className={`max-w-6xl mx-auto flex flex-col-reverse ${
+              mission.image?.position === "left"
+                ? "md:flex-row"
+                : "md:flex-row-reverse"
+            } gap-8 items-center`}
+          >
+            <div className="md:w-1/2">
+              <div
+                className={`prose ${mission.dark ? "prose-invert" : ""} prose-lg`}
+                dangerouslySetInnerHTML={{ __html: mission.contentHtml }}
               />
             </div>
+            {mission.image?.url && (
+              <div className="md:w-1/2">
+                <div className="rounded-xl overflow-hidden shadow-sm">
+                  <img
+                    src={mission.image.url}
+                    alt={mission.title}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      </Section>
+        </Section>
+      )}
 
-      {/* Our Story */}
-      <Section title={story.title} dark={story.dark}>
-        <div className={`max-w-6xl mx-auto flex flex-col-reverse ${story.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
-          <div className="md:w-1/2">
-            <div className={`prose ${story.dark ? 'prose-invert' : ''} prose-lg`}>
-              {story.content}
-            </div>
-          </div>
-          <div className="md:w-1/2">
-            <div className="rounded-xl overflow-hidden shadow-sm">
-              <img
-                src={story.image.src}
-                alt={story.image.alt}
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover"
+      {/* 🟧 Our Story */}
+      {story && (
+        <Section title={story.title} dark={story.dark || true}>
+          <div
+            className={`max-w-6xl mx-auto flex flex-col-reverse ${
+              story.image?.position === "left"
+                ? "md:flex-row"
+                : "md:flex-row-reverse"
+            } gap-8 items-center`}
+          >
+            <div className="md:w-1/2">
+              <div
+                className={`prose ${story.dark ? "prose-invert" : ""} prose-lg`}
+                dangerouslySetInnerHTML={{ __html: story.contentHtml }}
               />
             </div>
+            {story.image?.url && (
+              <div className="md:w-1/2">
+                <div className="rounded-xl overflow-hidden shadow-sm">
+                  <img
+                    src={story.image.url}
+                    alt={story.title}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      </Section>
-
-
+        </Section>
+      )}
 
       {/* Impact Statement */}
       <Section title="Impact Statement">
@@ -217,28 +207,38 @@ const AboutUs = () => {
         </div>
       </Section>
 
-
-      {/* Our Vision */}
-      <Section title={vision.title} dark={vision.dark}>
-        <div className={`max-w-6xl mx-auto flex flex-col-reverse ${vision.image.position === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 items-center`}>
-          <div className="md:w-1/2">
-            <div className={`prose ${vision.dark ? 'prose-invert' : ''} prose-lg`}>
-              {vision.content}
-            </div>
-          </div>
-          <div className="md:w-1/2">
-            <div className="rounded-xl overflow-hidden shadow-sm">
-              <img
-                src={vision.image.src}
-                alt={vision.image.alt}
-                width={600}
-                height={400}
-                className="w-full h-auto object-cover"
+      {/* 🟦 Our Vision */}
+      {vision && (
+        <Section title={vision.title} dark={vision.dark || true}>
+          <div
+            className={`max-w-6xl mx-auto flex flex-col-reverse ${
+              vision.image?.position === "left"
+                ? "md:flex-row"
+                : "md:flex-row-reverse"
+            } gap-8 items-center`}
+          >
+            <div className="md:w-1/2">
+              <div
+                className={`prose ${vision.dark ? "prose-invert" : ""} prose-lg`}
+                dangerouslySetInnerHTML={{ __html: vision.contentHtml }}
               />
             </div>
+            {vision.image?.url && (
+              <div className="md:w-1/2">
+                <div className="rounded-xl overflow-hidden shadow-sm">
+                  <img
+                    src={vision.image.url}
+                    alt={vision.title}
+                    width={600}
+                    height={400}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </div>
+            )}
           </div>
-        </div>
-      </Section>
+        </Section>
+      )}
     </div>
   );
 };

@@ -56,12 +56,7 @@ function Dashboard() {
 
   useEffect(() => {
     const recentActivities = [
-      {
-        type: 'newsletter',
-        icon: <Mail className="text-red-500" size={20} />,
-        title: "New newsletter subscriber joined 🎉",
-        timestamp: "Just now",
-      },
+      
       {
         type: 'blog',
         icon: <FileText className="text-blue-500" size={20} />,
@@ -128,12 +123,7 @@ function Dashboard() {
       icon: <Users size={24} />, 
       className: 'bg-teal-50 hover:bg-teal-100 transition-colors' 
     },
-    { 
-      title: 'Newsletter Subscribers', 
-      value: newsletterCount, 
-      icon: <Mail size={24} />, 
-      className: 'bg-red-50 hover:bg-red-100 transition-colors' 
-    },
+   
   ];
 
   return (
@@ -222,13 +212,6 @@ function Dashboard() {
               <span>Post News</span>
             </button>
 
-            <button
-              onClick={() => navigate('/admin/newsletter')}
-              className="p-4 bg-red-50 rounded-lg text-red-700 hover:bg-red-100 transition-colors flex flex-col items-center"
-            >
-              <Mail className="mb-2" />
-              <span>Manage Newsletters</span>
-            </button>
           </div>
         </div>
       </div>
